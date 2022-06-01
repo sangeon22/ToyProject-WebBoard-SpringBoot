@@ -52,7 +52,7 @@
 
     <div class="container">
         <h2>게시판</h2>
-        <div>총 건수 : <span th:text="${#lists.size(boards)}"></span></div>
+        <div>총 건수 : <span th:text="${boards.totalElements}"></span></div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -69,6 +69,19 @@
                 </tr>
             </tbody>
         </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
         <div class="text-right">
             <a type="button" class="btn btn-primary" th:href="@{/board/form}" >쓰기</a>
         </div>
