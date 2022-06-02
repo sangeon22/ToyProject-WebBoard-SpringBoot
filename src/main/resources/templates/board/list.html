@@ -53,6 +53,13 @@
     <div class="container">
         <h2>게시판</h2>
         <div>총 건수 : <span th:text="${boards.totalElements}"></span></div>
+        <form class="form-inline d-flex justify-content-end" method="GET" th:action="@{/board/list}">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="searchKeyword" class="sr-only">검색</label>
+                <input type="text" class="form-control" id="searchKeyword" name="searchKeyword" placeholder="검색" th:value="${param.searchKeyword}">
+            </div>
+            <button type="submit" class="btn btn-light mb-2">검색</button>
+        </form>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -72,12 +79,12 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber+1} ? 'disabled'">
-                    <a class="page-link" href="#" th:href="@{/board/list(page=${boards.pageable.pageNumber -1})}" tabindex="-1" aria-disabled="true">이전</a>
+                    <a class="page-link" href="#" th:href="@{/board/list(page=${boards.pageable.pageNumber -1}, searchKeyword=${param.searchKeyword})}" tabindex="-1" aria-disabled="true">이전</a>
                 </li>
                 <li class="page-item" th:classappend="${i == boards.pageable.pageNumber+1} ? 'disabled'" th:each="i: ${#numbers.sequence(startPage, endPage)}">
-                    <a class="page-link" href="#" th:href="@{/board/list(page=${i -1})}" th:text="${i}">페이지 번호</a></li>
+                    <a class="page-link" href="#" th:href="@{/board/list(page=${i -1}, searchKeyword=${param.searchKeyword})}" th:text="${i}">페이지 번호</a></li>
                 <li class="page-item" th:classappend="${boards.getTotalPages == boards.pageable.pageNumber+1} ? 'disabled'">
-                    <a class="page-link" href="#" th:href="@{/board/list(page=${boards.pageable.pageNumber +1})}">다음</a>
+                    <a class="page-link" href="#" th:href="@{/board/list(page=${boards.pageable.pageNumber +1}, searchKeyword=${param.searchKeyword})}">다음</a>
                 </li>
             </ul>
         </nav>
