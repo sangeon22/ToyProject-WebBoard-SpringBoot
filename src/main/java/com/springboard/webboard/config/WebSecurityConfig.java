@@ -1,4 +1,4 @@
-package com.springboard.webboard.Config;
+package com.springboard.webboard.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
