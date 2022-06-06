@@ -14,7 +14,7 @@ class BoardApiController {
     @Autowired
     private BoardRepository repository;
 
-    @GetMapping("/board")
+    @GetMapping("/boards")
     List<Board> all(@RequestParam(required = false, defaultValue = "") String title,
                     @RequestParam(required = false, defaultValue = "") String content) {
         if (StringUtils.isEmpty(title) && StringUtils.isEmpty(content)) {
@@ -24,20 +24,20 @@ class BoardApiController {
         }
     }
 
-    @PostMapping("/board")
+    @PostMapping("/boards")
     Board newBoard(@RequestBody Board newBoard) {
         return repository.save(newBoard);
     }
 
     // Single item
 
-    @GetMapping("/board/{id}")
+    @GetMapping("/boards/{id}")
     Board one(@PathVariable Long id) {
 
         return repository.findById(id).orElse(null);
     }
 
-    @PutMapping("/board/{id}")
+    @PutMapping("/boards/{id}")
     Board replaceBoard(@RequestBody Board newBoard, @PathVariable Long id) {
 
         return repository.findById(id)
@@ -52,7 +52,7 @@ class BoardApiController {
                 });
     }
 
-    @DeleteMapping("/board/{id}")
+    @DeleteMapping("/boards/{id}")
     void deleteBoard(@PathVariable Long id) {
         repository.deleteById(id);
     }
