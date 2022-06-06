@@ -2,10 +2,7 @@ package com.springboard.webboard.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -23,4 +20,9 @@ public class Board {
     @Size(min = 2, max = 30, message = "제목을 2자이상 30자 이하로 입력해주세요.")
     private String title;
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

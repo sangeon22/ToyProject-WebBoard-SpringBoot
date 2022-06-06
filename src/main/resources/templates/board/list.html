@@ -70,9 +70,9 @@
             </thead>
             <tbody>
                 <tr th:each="board : ${boards}">
-                    <td th:text="${board.id}">Mark</td>
-                    <td><a th:text="${board.title}" th:href="@{/board/form(id=${board.id})}">Otto</a></td>
-                    <td>홍길동</td>
+                    <td th:text="${board.id}">id</td>
+                    <td><a th:text="${board.title}" th:href="@{/board/form(id=${board.id})}">제목</a></td>
+                    <td th:text="${board.user.username}">작성자</td>
                 </tr>
             </tbody>
         </table>
