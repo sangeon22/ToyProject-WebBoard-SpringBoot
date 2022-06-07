@@ -1,6 +1,8 @@
 package com.springboard.webboard.controller;
 
+import com.querydsl.core.types.Predicate;
 import com.springboard.webboard.entity.Board;
+import com.springboard.webboard.entity.QUser;
 import com.springboard.webboard.entity.User;
 import com.springboard.webboard.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,11 +20,21 @@ class UserApiController {
     private UserRepository repository;
 
     @GetMapping("/users")
-    List<User> all() {
-        List<User> users = repository.findAll();
-        log.debug("getBoard().size() 호출 전");
-        log.debug("getBoard().size() : {}", users.get(0).getBoards().size());
-        log.debug("getBoard().size() 호출 후");
+    Iterable<User> all(@RequestParam(required = false) String method,
+                   @RequestParam(required = false) String text) {
+        Iterable<User> users = null;
+        if ("query".equals(method)) {
+            users = repository.findByUsernameJPQLQuery(text);
+        } else if ("nativeQuery".equals(method)) {
+            users = repository.findByUsernameNativeQuery(text);
+        } else if("querydsl".equals(method)){
+            QUser user = QUser.user;
+            Predicate predicate = user.username.contains(text);
+            users = repository.findAll(predicate);
+        }
+        else {
+            users = repository.findAll();
+        }
         return users;
     }
 
@@ -49,7 +61,7 @@ class UserApiController {
 //                    user.setBoards(newUser.getBoards());
                     user.getBoards().clear();
                     user.getBoards().addAll(newUser.getBoards());
-                    for(Board board : user.getBoards()) {
+                    for (Board board : user.getBoards()) {
                         board.setUser(user);
                     }
                     return repository.save(user);
