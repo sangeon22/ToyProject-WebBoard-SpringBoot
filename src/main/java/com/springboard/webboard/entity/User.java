@@ -28,7 +28,7 @@ public class User {
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    @JsonIgnore
+    @JsonIgnore
     private List<Board> boards = new ArrayList<>();
 
 

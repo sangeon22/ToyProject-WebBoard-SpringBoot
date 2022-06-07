@@ -5,6 +5,7 @@ import java.util.List;
 import com.springboard.webboard.entity.Board;
 import com.springboard.webboard.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
@@ -41,10 +42,10 @@ class BoardApiController {
     Board replaceBoard(@RequestBody Board newBoard, @PathVariable Long id) {
 
         return repository.findById(id)
-                .map(employee -> {
-                    employee.setTitle(newBoard.getTitle());
-                    employee.setContent(newBoard.getContent());
-                    return repository.save(employee);
+                .map(board -> {
+                    board.setTitle(newBoard.getTitle());
+                    board.setContent(newBoard.getContent());
+                    return repository.save(board);
                 })
                 .orElseGet(() -> {
                     newBoard.setId(id);
@@ -52,6 +53,7 @@ class BoardApiController {
                 });
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/boards/{id}")
     void deleteBoard(@PathVariable Long id) {
         repository.deleteById(id);
