@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Data
-public class Board {
+public class Board extends TimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -35,7 +35,7 @@ public class BoardController {
 
     @GetMapping("/list")
     public String list(Model model,
-                       @PageableDefault(size = 2) Pageable pageable,
+                       @PageableDefault(size = 5, sort = "modifiedDate", direction = Sort.Direction.DESC) Pageable pageable,
                        @RequestParam(required = false, defaultValue = "") String searchKeyword) {
 
 //        Page<Board> boards = boardRepository.findAll(pageable);
