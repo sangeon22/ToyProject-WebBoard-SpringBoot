@@ -7,6 +7,7 @@ import com.springboard.webboard.entity.User;
 import com.springboard.webboard.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
@@ -19,20 +20,26 @@ class UserApiController {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
     @GetMapping("/users")
     Iterable<User> all(@RequestParam(required = false) String method,
-                   @RequestParam(required = false) String text) {
+                       @RequestParam(required = false) String text) {
         Iterable<User> users = null;
         if ("query".equals(method)) {
             users = repository.findByUsernameJPQLQuery(text);
         } else if ("nativeQuery".equals(method)) {
             users = repository.findByUsernameNativeQuery(text);
-        } else if("querydsl".equals(method)){
+        } else if ("querydsl".equals(method)) {
             QUser user = QUser.user;
             Predicate predicate = user.username.contains(text);
             users = repository.findAll(predicate);
-        }
-        else {
+        } else if ("querydslCustom".equals(method)) {
+            users = repository.findByUsernameCustom(text);
+        } else if ("jdbc".equals(method)) {
+            users = repository.findByUsernameJdbc(text);
+        } else {
             users = repository.findAll();
         }
         return users;

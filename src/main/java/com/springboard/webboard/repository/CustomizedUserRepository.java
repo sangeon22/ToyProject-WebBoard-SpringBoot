@@ -2,6 +2,10 @@ package com.springboard.webboard.repository;
 
 import com.springboard.webboard.entity.User;
 
+import java.util.List;
+
 public interface CustomizedUserRepository {
-    void findByUsernameCustom(User user);
+    List<User> findByUsernameCustom(String username);
+
+    List<User> findByUsernameJdbc(String username);
 }
