@@ -56,7 +56,7 @@
         <form class="form-inline d-flex justify-content-end" method="GET" th:action="@{/board/list}">
             <div class="form-group mx-sm-3 mb-2">
                 <label for="searchKeyword" class="sr-only">검색</label>
-                <input type="text" class="form-control" id="searchKeyword" name="searchKeyword" placeholder="검색"
+                <input type="text" class="form-control" id="searchKeyword" name="searchKeyword" placeholder="제목 및 내용 검색"
                     th:value="${param.searchKeyword}">
             </div>
             <button type="submit" class="btn btn-light mb-2">검색</button>
@@ -104,7 +104,7 @@
             </ul>
         </nav>
         <div class="text-right">
-            <a type="button" class="btn btn-primary" th:href="@{/board/form}">쓰기</a>
+            <a type="button" class="btn btn-primary" th:href="@{/board/form}">글 작성</a>
         </div>
     </div>
 

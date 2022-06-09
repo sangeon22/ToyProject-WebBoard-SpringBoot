@@ -27,4 +27,8 @@ public class Board extends TimeEntity{
     @JsonIgnore
     private User user;
 
+    private String filename;
+
+    private String filepath;
+
 }

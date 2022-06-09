@@ -17,8 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -59,14 +61,14 @@ public class BoardController {
 
     @GetMapping("/boardview")
     public String form(Model model, @RequestParam(required = false) Long id) {
-            Board board = boardRepository.findById(id).orElse(null);
-            model.addAttribute("board", board);
+        Board board = boardRepository.findById(id).orElse(null);
+        model.addAttribute("board", board);
 
-            return "/board/boardview";
+        return "/board/boardview";
     }
 
     @GetMapping("/form")
-    public String form(Model model){
+    public String form(Model model) {
         model.addAttribute("board", new Board());
         return "board/form";
     }
@@ -74,7 +76,8 @@ public class BoardController {
     @PostMapping("/form")
     public String postForm(@Valid Board board,
                            BindingResult bindingResult,
-                           Authentication authentication) {
+                           Authentication authentication,
+                           MultipartFile file) throws IOException {
         boardValidator.validate(board, bindingResult);
         if (bindingResult.hasErrors()) {
             return "board/form";
@@ -82,22 +85,23 @@ public class BoardController {
 //        컨트롤러 외의 서비스에서 인증정보 필요할 땐 컨텍스트홀더 사용
 //        Authentication a = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        boardService.save(board, username);
+        boardService.save(board, username, file);
 //        boardRepository.save(board);
 
         return "redirect:/board/list";
     }
 
     @GetMapping("/modify/{id}")
-    public String modifyForm(Model model,  @PathVariable Long id){
+    public String modifyForm(Model model, @PathVariable Long id) {
         model.addAttribute("board", boardService.boardView(id));
         return "board/form";
     }
 
     @PostMapping("/modify/{id}")
     public String modify(@Valid Board board,
-                           BindingResult bindingResult,
-                           Authentication authentication) {
+                         BindingResult bindingResult,
+                         Authentication authentication,
+                         MultipartFile file) throws IOException {
         boardValidator.validate(board, bindingResult);
         if (bindingResult.hasErrors()) {
             return "board/form";
@@ -105,7 +109,7 @@ public class BoardController {
 //        컨트롤러 외의 서비스에서 인증정보 필요할 땐 컨텍스트홀더 사용
 //        Authentication a = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        boardService.save(board, username);
+        boardService.save(board, username, file);
 //        boardRepository.save(board);
 
         return "redirect:/board/list";

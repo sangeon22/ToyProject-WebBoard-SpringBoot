@@ -25,17 +25,16 @@
         <form action="#" th:action="@{/board/boardview}" th:object="${board}" method="post">
             <input type="hidden" th:field="*{id}">
 
+<!--            <div class="form-group">-->
+<!--                <label for="inp-type-5" class="col-sm-2 control-label">작성 시간</label>-->
+<!--                &lt;!&ndash;                <label for="inp-type-5" class="col-sm-2 control-label" th:text="${board.modifiedDate}">등록일</label>&ndash;&gt;-->
+<!--                <div class="col-sm-10">-->
+<!--                    <p class="form-control" th:text="${board.modifiedDate}"></p>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="form-group">
-                <label for="inp-type-5" class="col-sm-2 control-label">등록일</label>
-<!--                <label for="inp-type-5" class="col-sm-2 control-label" th:text="${board.modifiedDate}">등록일</label>-->
-                <div class="col-sm-10">
-                    <p class="form-control" th:text="${board.modifiedDate}" ></p>
-                </div>
-            </div>
-
-            <div class="form-group">
-<!--                <p th:text="${board.title}">내용이 들어갈 부분입니다.</p>-->
-<!--                <p th:text="${board.content}">내용이 들어갈 부분입니다.</p>-->
+                <!--                <p th:text="${board.title}">내용이 들어갈 부분입니다.</p>-->
+                <!--                <p th:text="${board.content}">내용이 들어갈 부분입니다.</p>-->
                 <label for="title">제목</label>
                 <input type="text" class="form-control" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'"
                     id="title" th:field="*{title}" disabled>
@@ -43,22 +42,30 @@
                     제목 에러 메세지
                 </div>
             </div>
+            <div class="form-group">
+                <img th:src="@{${board.filepath}}" class="img-fluid" alt="Responsive image" onerror="this.style.display='none'">
+                <br>
+                <div class="text-right">
+                    <a th:if="${board.filepath} != null" ? th:href="@{${board.filepath}}"  >파일 다운</a>
+                </div>
+            </div>
+
 
             <div class="form-group">
                 <label for="content">내용</label>
                 <textarea class="form-control" id="content" rows="3" th:field="*{content}"
                     th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" disabled></textarea>
-                <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}" >
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
                     내용 에러 메세지
                 </div>
             </div>
 
             <div class="text-right">
-                <a class="btn btn-primary" th:href="@{/board/list}">목록</a>
+                <a class="btn btn-primary" th:href="@{/board/list}">뒤로 가기</a>
                 <a class="btn btn-primary" th:href="@{/board/modify/{id}(id = ${board.id})}">수정</a>
-<!--                <button type="submit" class="btn btn-primary">수정</button>-->
+                <!--                <button type="submit" class="btn btn-primary">수정</button>-->
                 <button type="button" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')"
-                th:onclick="|deleteBoard(*{id})|">삭제</button>
+                    th:onclick="|deleteBoard(*{id})|">삭제</button>
             </div>
         </form>
     </div>

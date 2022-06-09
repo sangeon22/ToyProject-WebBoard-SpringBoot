@@ -53,7 +53,9 @@
             <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post"
                 sec:authorize="isAuthenticated()">
                 <!--            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
-                <span class="text-white" sec:authentication="name">사용자</span>
+                <label class="text my-2 mr-2 my-sm-0" style="color: #007afe">사용자:</label>
+                <span class="text-white" sec:authentication="name">이용자</span>
+                <label class="text my-2 ml-4 my-sm-0" style="color: #007afe">권한:</label>
                 <span class="text-white mx-2" sec:authentication="principal.authorities">권한</span>
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
             </form>
