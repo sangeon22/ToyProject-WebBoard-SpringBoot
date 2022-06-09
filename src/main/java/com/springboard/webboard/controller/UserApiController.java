@@ -1,8 +1,6 @@
 package com.springboard.webboard.controller;
 
-import com.querydsl.core.types.Predicate;
 import com.springboard.webboard.entity.Board;
-import com.springboard.webboard.entity.QUser;
 import com.springboard.webboard.entity.User;
 import com.springboard.webboard.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -31,14 +29,14 @@ class UserApiController {
             users = repository.findByUsernameJPQLQuery(text);
         } else if ("nativeQuery".equals(method)) {
             users = repository.findByUsernameNativeQuery(text);
-        } else if ("querydsl".equals(method)) {
-            QUser user = QUser.user;
-            Predicate predicate = user.username.contains(text);
-            users = repository.findAll(predicate);
-        } else if ("querydslCustom".equals(method)) {
-            users = repository.findByUsernameCustom(text);
-        } else if ("jdbc".equals(method)) {
-            users = repository.findByUsernameJdbc(text);
+//        } else if ("querydsl".equals(method)) {
+//            QUser user = QUser.user;
+//            Predicate predicate = user.username.contains(text);
+//            users = repository.findAll(predicate);
+//        } else if ("querydslCustom".equals(method)) {
+//            users = repository.findByUsernameCustom(text);
+//        } else if ("jdbc".equals(method)) {
+//            users = repository.findByUsernameJdbc(text);
         } else {
             users = repository.findAll();
         }

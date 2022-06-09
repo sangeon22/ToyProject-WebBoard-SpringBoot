@@ -21,4 +21,8 @@ public class BoardService {
         board.setUser(user);
         return boardRepository.save(board);
     }
+
+    public Board boardView(Long id){
+        return boardRepository.findById(id).get();
+    }
 }
