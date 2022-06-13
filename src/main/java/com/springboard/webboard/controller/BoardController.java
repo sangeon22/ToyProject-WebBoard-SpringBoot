@@ -77,7 +77,8 @@ public class BoardController {
     public String postForm(@Valid Board board,
                            BindingResult bindingResult,
                            Authentication authentication,
-                           MultipartFile file) throws IOException {
+                           MultipartFile file,
+                           Model model) throws IOException {
         boardValidator.validate(board, bindingResult);
         if (bindingResult.hasErrors()) {
             return "board/form";
@@ -87,31 +88,36 @@ public class BoardController {
         String username = authentication.getName();
         boardService.save(board, username, file);
 //        boardRepository.save(board);
+        model.addAttribute("message", "글 작성이 완료되었습니다.");
+        model.addAttribute("searchUrl", "/board/list");
 
-        return "redirect:/board/list";
+        return "board/message";
     }
 
     @GetMapping("/modify/{id}")
     public String modifyForm(Model model, @PathVariable Long id) {
         model.addAttribute("board", boardService.boardView(id));
-        return "board/form";
+        return "board/modify";
     }
 
     @PostMapping("/modify/{id}")
     public String modify(@Valid Board board,
                          BindingResult bindingResult,
                          Authentication authentication,
-                         MultipartFile file) throws IOException {
+                         MultipartFile file,
+                         Model model) throws IOException {
         boardValidator.validate(board, bindingResult);
         if (bindingResult.hasErrors()) {
-            return "board/form";
+            return "board/modify";
         }
 //        컨트롤러 외의 서비스에서 인증정보 필요할 땐 컨텍스트홀더 사용
 //        Authentication a = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         boardService.save(board, username, file);
+        model.addAttribute("message", "글 수정이 완료되었습니다.");
+        model.addAttribute("searchUrl", "/board/list");
 //        boardRepository.save(board);
 
-        return "redirect:/board/list";
+        return "board/message";
     }
 }

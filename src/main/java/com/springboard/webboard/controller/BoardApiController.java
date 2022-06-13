@@ -6,6 +6,7 @@ import com.springboard.webboard.entity.Board;
 import com.springboard.webboard.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
@@ -55,7 +56,9 @@ class BoardApiController {
 
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/boards/{id}")
-    void deleteBoard(@PathVariable Long id) {
+    void deleteBoard(@PathVariable Long id, Model model) {
         repository.deleteById(id);
+        model.addAttribute("message", "글 삭제가 완료되었습니다.");
+        model.addAttribute("searchUrl", "/board/list");
     }
 }

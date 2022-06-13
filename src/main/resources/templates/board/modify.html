@@ -22,7 +22,7 @@
         <h2>게시판</h2>
         <br>
 
-        <form action="#" th:action="@{/board/modify/{id}(id = ${board.id})}" th:object="${board}" method="post">
+        <form action="#" th:action="@{/board/modify/{id}(id = ${board.id})}" th:object="${board}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}">
 
             <div class="form-group">
@@ -41,13 +41,15 @@
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
                     내용 에러 메세지
                 </div>
+                <br>
+                <input name="file" type="file" >
             </div>
 
             <div class="text-right">
                 <a class="btn btn-primary" th:href="@{/board/list}">취소</a>
                 <button type="button" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')"
                     th:onclick="|deleteBoard(*{id})|">삭제</button>
-                <button type="submit" class="btn btn-primary">확인</button>
+                <button type="submit" class="btn btn-primary">확인df</button>
             </div>
         </form>
     </div>

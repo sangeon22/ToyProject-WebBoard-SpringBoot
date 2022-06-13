@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="form-group">
-            <img th:src="@{${board.filepath}}" class="img-fluid" alt="Responsive image" onerror="this.style.display='none'">
+            <img th:src="@{${board.filepath}}" class="rounded mx-auto d-block" alt="Responsive image" onerror="this.style.display='none'">
             <br>
             <div class="text-right">
                 <a th:if="${board.filepath} != null" ? th:href="@{${board.filepath}}"  >파일 다운</a>
