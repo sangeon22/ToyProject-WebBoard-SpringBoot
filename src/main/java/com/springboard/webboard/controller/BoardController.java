@@ -39,7 +39,7 @@ public class BoardController {
     //} = "modifiedDate", direction = Sort.Direction.DESC)
     @GetMapping("/list")
     public String list(Model model,
-                       @PageableDefault(size = 5)
+                       @PageableDefault(size = 1)
                        @SortDefault.SortDefaults({
                                @SortDefault(sort = "modifiedDate", direction = Sort.Direction.DESC),
                                @SortDefault(sort = "createdDate", direction = Sort.Direction.DESC),
@@ -48,12 +48,23 @@ public class BoardController {
 
 //        Page<Board> boards = boardRepository.findAll(pageable);
         Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchKeyword, searchKeyword, pageable);
-        int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4);
-        int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 4);
+//        int block = boards.getTotalPages() / 5;
+//        if (boards.getTotalPages() % 5 != 0) {
+//            block++;
+//        }
+        int block = 5;
+        int startBlockPage = ((boards.getPageable().getPageNumber()) / block) * block + 1;
+        int endBlockPage = startBlockPage + block - 1;
+        if (endBlockPage > boards.getTotalPages()) {
+            endBlockPage = boards.getTotalPages();
+        }
+//        int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4);
+//        int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 4);
+
 //        int startPage = 1;
 //        int endPage = boards.getTotalPages();
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
+        model.addAttribute("startPage", startBlockPage);
+        model.addAttribute("endPage", endBlockPage);
         model.addAttribute("boards", boards);
 
         return "board/list";
