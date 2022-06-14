@@ -22,23 +22,27 @@ public class BoardService {
     private UserRepository userRepository;
 
     public void save(Board board, String username,
-                      MultipartFile file) throws IOException {
+                     MultipartFile file) throws IOException {
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
-        UUID uuid = UUID.randomUUID();
-        String fileName = uuid + "_" + file.getOriginalFilename();
+        if (!file.getOriginalFilename().equals("")) {
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid + "_" + file.getOriginalFilename();
 
-        File saveFile = new File(projectPath, fileName);
-        file.transferTo(saveFile);
+            File saveFile = new File(projectPath, fileName);
+            file.transferTo(saveFile);
 
-        board.setFilename(fileName);
-        board.setFilepath("/files/" + fileName);
+            board.setFilename(fileName);
+            board.setFilepath("/files/" + fileName);
+        }
         User user = userRepository.findByUsername(username);
         board.setUser(user);
         boardRepository.save(board);
     }
 
-    public Board boardView(Long id){
+    public Board boardView(Long id) {
         return boardRepository.findById(id).get();
     }
+
+
 }

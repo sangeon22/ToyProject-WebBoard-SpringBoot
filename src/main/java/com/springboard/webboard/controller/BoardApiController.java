@@ -56,9 +56,7 @@ class BoardApiController {
 
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/boards/{id}")
-    void deleteBoard(@PathVariable Long id, Model model) {
+    void deleteBoard(@PathVariable Long id) {
         repository.deleteById(id);
-        model.addAttribute("message", "글 삭제가 완료되었습니다.");
-        model.addAttribute("searchUrl", "/board/list");
     }
 }

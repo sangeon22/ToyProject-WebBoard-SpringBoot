@@ -47,8 +47,6 @@
 
             <div class="text-right">
                 <a class="btn btn-primary" th:href="@{/board/list}">취소</a>
-                <button type="button" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')"
-                    th:onclick="|deleteBoard(*{id})|">삭제</button>
                 <button type="submit" class="btn btn-primary">확인df</button>
             </div>
         </form>
@@ -57,20 +55,7 @@
 
     <footer th:replace="fragments/common :: footer"></footer>
 
-    <script>
-        function deleteBoard(id) {
-            //DELETE /api/boards/{id}
-            $.ajax({
-                url: '/api/boards/' + id,
-                type: 'DELETE',
-                success: function (result) {
-                    console.log('result', result);
-                    alert('삭제됐습니다.');
-                    window.location.href = '/board/list';
-                }
-            });
-        }
-    </script>
+
 
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
