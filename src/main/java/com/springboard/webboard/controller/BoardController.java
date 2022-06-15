@@ -39,7 +39,7 @@ public class BoardController {
     //} = "modifiedDate", direction = Sort.Direction.DESC)
     @GetMapping("/list")
     public String list(Model model,
-                       @PageableDefault(size = 1)
+                       @PageableDefault(size = 5)
                        @SortDefault.SortDefaults({
                                @SortDefault(sort = "modifiedDate", direction = Sort.Direction.DESC),
                                @SortDefault(sort = "createdDate", direction = Sort.Direction.DESC),

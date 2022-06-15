@@ -61,9 +61,11 @@
             </div>
             <button type="submit" class="btn btn-light mb-2">검색</button>
         </form>
-        <table class="table table-striped">
-            <thead>
-                <tr>
+<!--        class="text-center"-->
+<!--        style="width:100%; height: 100px; margin: auto; text-align: justify-all;"-->
+        <table class="table table-striped"  >
+            <thead class="table-dark">
+                <tr class="text-center">
                     <th scope="col">번호</th>
                     <th scope="col">제목</th>
                     <th scope="col">작성자</th>
@@ -71,7 +73,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="board : ${boards}">
+                <tr th:each="board : ${boards}" class="text-center">
                     <td th:text="${board.id}">id</td>
                     <td><a th:text="${board.title}" th:href="@{/board/boardview(id=${board.id})}">제목</a></td>
                     <td th:text="${board.user.username}">작성자</td>
@@ -83,6 +85,7 @@
                 </tr>
             </tbody>
         </table>
+        <br>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber+1} ? 'disabled'">
@@ -106,6 +109,7 @@
         <div class="text-right">
             <a type="button" class="btn btn-primary" th:href="@{/board/form}">글 작성</a>
         </div>
+        <br>
     </div>
 
     <footer th:replace="fragments/common :: footer"></footer>
