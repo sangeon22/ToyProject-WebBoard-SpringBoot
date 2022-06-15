@@ -44,7 +44,6 @@
             <div class="form-group">
                 <img th:if="${board.filename} != null" ? th:src="@{${board.filepath}}" class="img-fluid"
                     alt="Responsive image" onerror="this.style.display='none'">
-                <br>
                 <div class="text-right">
                     <a th:if="${board.filename} != null" ? th:href="@{${board.filepath}}">파일 다운</a>
                 </div>
@@ -53,7 +52,7 @@
 
             <div class="form-group">
                 <label for="content">내용</label>
-                <textarea class="form-control" id="content" rows="3" th:field="*{content}"
+                <textarea class="form-control" id="content" rows="5" th:field="*{content}"
                     th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" disabled></textarea>
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
                     내용 에러 메세지

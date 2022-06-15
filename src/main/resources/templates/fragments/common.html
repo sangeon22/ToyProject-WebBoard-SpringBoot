@@ -14,6 +14,13 @@
     <title th:text="${title}">Hello, Spring Boot!</title>
 </head>
 
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        </div>
+    </div>
+</header>
+
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:fragment="menu(menu)">
         <a class="navbar-brand" href="#">어니언 웹 사이트</a>
@@ -21,6 +28,14 @@
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+<!--        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">-->
+<!--            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>-->
+<!--            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>-->
+<!--            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>-->
+<!--            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>-->
+<!--            <li><a href="#" class="nav-link px-2 text-white">About</a></li>-->
+<!--        </ul>-->
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
@@ -46,10 +61,11 @@
              </li>-->
             </ul>
 
-            <a class="btn btn-secondary my-2 mr-2 my-sm-0" th:href="@{/account/login}"
-                sec:authorize="!isAuthenticated()">로그인</a>
-            <a class="btn btn-secondary my-2 my-sm-0" th:href="@{/account/register}"
-                sec:authorize="!isAuthenticated()">회원가입</a>
+            <a class="btn btn-outline-light my-2 mr-2 my-sm-0" th:href="@{/account/login}"
+               sec:authorize="!isAuthenticated()">로그인</a>
+            <a class="btn btn-warning my-2 my-sm-0" th:href="@{/account/register}"
+               sec:authorize="!isAuthenticated()">회원가입</a>
+
             <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post"
                 sec:authorize="isAuthenticated()">
                 <!--            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
@@ -57,10 +73,26 @@
                 <span class="text-white" sec:authentication="name">이용자</span>
                 <label class="text my-2 ml-4 my-sm-0" style="color: #007afe">권한:</label>
                 <span class="text-white mx-2" sec:authentication="principal.authorities">권한</span>
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+                <button class="btn btn-warning my-2 my-sm-0" type="submit">Logout</button>
             </form>
         </div>
     </nav>
+
+<!--    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top" th:fragment="footer">-->
+<!--        <p class="col-md-4 mb-0 text-muted">&copy; 2022 Company, Inc</p>-->
+
+<!--        <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">-->
+<!--            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>-->
+<!--        </a>-->
+
+<!--        <ul class="nav col-md-4 justify-content-end">-->
+<!--            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>-->
+<!--            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>-->
+<!--            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>-->
+<!--            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>-->
+<!--            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>-->
+<!--        </ul>-->
+<!--    </footer>-->
 
     <footer th:fragment="footer">
         <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
