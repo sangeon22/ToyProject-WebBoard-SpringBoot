@@ -24,7 +24,7 @@
 
         <form action="#" th:action="@{/board/modify/{id}(id = ${board.id})}" th:object="${board}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}">
-
+            <input type="hidden"  th:field="${board.user.username}">
             <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" class="form-control" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'"

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -111,6 +112,7 @@ public class BoardController {
         return "board/modify";
     }
 
+    @PreAuthorize("isAuthenticated() and (( #board.user == principal.username ) or hasRole('ROLE_ADMIN'))")
     @PostMapping("/modify/{id}")
     public String modify(@Valid Board board,
                          BindingResult bindingResult,
@@ -123,7 +125,7 @@ public class BoardController {
         }
 //        컨트롤러 외의 서비스에서 인증정보 필요할 땐 컨텍스트홀더 사용
 //        Authentication a = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
+        String username = board.getUser().getUsername();
         boardService.save(board, username, file);
         model.addAttribute("message", "글 수정이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/list");
