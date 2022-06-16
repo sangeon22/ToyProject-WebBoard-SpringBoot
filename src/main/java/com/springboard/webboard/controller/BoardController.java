@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -112,7 +113,8 @@ public class BoardController {
         return "board/modify";
     }
 
-    @PreAuthorize("isAuthenticated() and (( #board.user == principal.username ) or hasRole('ROLE_ADMIN'))")
+
+    @PreAuthorize("isAuthenticated() and (( #board.user.username == principal.getUsername() ) or hasRole('ROLE_ADMIN'))")
     @PostMapping("/modify/{id}")
     public String modify(@Valid Board board,
                          BindingResult bindingResult,
