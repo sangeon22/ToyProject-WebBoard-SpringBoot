@@ -68,7 +68,6 @@ public class BoardController {
         model.addAttribute("startPage", startBlockPage);
         model.addAttribute("endPage", endBlockPage);
         model.addAttribute("boards", boards);
-
         return "board/list";
     }
 
@@ -76,7 +75,8 @@ public class BoardController {
     public String form(Model model, @RequestParam(required = false) Long id) {
         Board board = boardRepository.findById(id).orElse(null);
         model.addAttribute("board", board);
-
+//        model.addAttribute("view", boardService.updateView(id));
+        boardService.updateView(id);
         return "/board/boardview";
     }
 
@@ -135,4 +135,6 @@ public class BoardController {
 
         return "board/message";
     }
+
+
 }

@@ -2,6 +2,7 @@ package com.springboard.webboard.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.security.core.Authentication;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,5 +31,10 @@ public class Board extends TimeEntity{
     private String filename;
 
     private String filepath;
+
+    private Integer view;
+
+//    @Column(columnDefinition = "integer default 0", nullable = false)
+//    private int view;
 
 }

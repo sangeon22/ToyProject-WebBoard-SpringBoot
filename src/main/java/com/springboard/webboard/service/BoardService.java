@@ -6,10 +6,12 @@ import com.springboard.webboard.repository.BoardRepository;
 import com.springboard.webboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,6 +23,7 @@ public class BoardService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     public void save(Board board, String username,
                      MultipartFile file) throws IOException {
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
@@ -40,9 +43,23 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    @Transactional
     public Board boardView(Long id) {
         return boardRepository.findById(id).get();
     }
 
+    @Transactional
+    public Optional<Board> findById(Long id) {
+        return boardRepository.findById(id);
+    }
 
+    @Transactional
+    public void deleteById(Long id) {
+        boardRepository.deleteById(id);
+    }
+
+    @Transactional
+    public int updateView(Long id) {
+        return boardRepository.updateView(id);
+    }
 }

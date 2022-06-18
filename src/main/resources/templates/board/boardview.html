@@ -24,6 +24,7 @@
 
         <form action="#" th:action="@{/board/boardview}" th:object="${board}" method="post">
             <input type="hidden" th:field="*{id}">
+            <input type="hidden"  th:field="${board.user.username}">
 
             <div class="form-group">
                 <label for="inp-type-5" >작성 시간</label>
@@ -77,7 +78,9 @@
                 <a class="btn btn-secondary" th:href="@{/board/list}">뒤로 가기</a>
                 <a class="btn btn-primary" th:href="@{/board/modify/{id}(id = ${board.id})}">수정</a>
                 <!--                <button type="submit" class="btn btn-primary">수정</button>-->
-                <button type="button" class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')"
+                <!--                sec:authorize="isAuthenticated() and (( #board.user.username == principal.getUsername()) or hasRole('ROLE_ADMIN'))"-->
+<!--                sec:authorize="hasRole('ROLE_ADMIN')"-->
+                <button type="button" class="btn btn-danger"
                     th:onclick="|deleteBoard(*{id})|">삭제</button>
             </div>
             <br>

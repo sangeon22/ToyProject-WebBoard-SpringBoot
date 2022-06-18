@@ -69,6 +69,7 @@
                     <th scope="col">글번호</th>
                     <th scope="col">제목</th>
                     <th scope="col">작성자</th>
+                    <th scope="col">조회수</th>
                     <th scope="col">작성 시간</th>
                 </tr>
             </thead>
@@ -77,6 +78,7 @@
                     <td th:text="${board.id}">id</td>
                     <td><a th:text="${board.title}" th:href="@{/board/boardview(id=${board.id})}">제목</a></td>
                     <td th:text="${board.user.username}">작성자</td>
+                    <td th:text="${board.view}">조회수</td>
                     <td th:text="${board.modifiedDate}==null ? ${board.createdDate} : ${board.modifiedDate}">작성시간</td>
 <!--                    <td th:text="${board.modifiedDate}">작성시간</td>-->
 <!--                    <td><div th:if="${board.modifiedDate} != null" th:text="${board.modifiedDate}">작성시간</div>-->
