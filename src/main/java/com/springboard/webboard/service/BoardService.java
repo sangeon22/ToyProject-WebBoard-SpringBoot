@@ -24,8 +24,10 @@ public class BoardService {
     private UserRepository userRepository;
 
     @Transactional
-    public void save(Board board, String username,
-                     MultipartFile file) throws IOException {
+    public void save(Board board,
+                     String username,
+                     MultipartFile file,
+                     Integer view) throws IOException {
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
         if (!file.getOriginalFilename().equals("")) {
@@ -40,6 +42,8 @@ public class BoardService {
         }
         User user = userRepository.findByUsername(username);
         board.setUser(user);
+        board.setView(view);
+//        board.setView(board.getView());
         boardRepository.save(board);
     }
 

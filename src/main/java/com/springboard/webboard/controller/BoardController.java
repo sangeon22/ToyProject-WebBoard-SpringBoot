@@ -74,9 +74,9 @@ public class BoardController {
     @GetMapping("/boardview")
     public String form(Model model, @RequestParam(required = false) Long id) {
         Board board = boardRepository.findById(id).orElse(null);
+        boardService.updateView(id);
         model.addAttribute("board", board);
 //        model.addAttribute("view", boardService.updateView(id));
-        boardService.updateView(id);
         return "/board/boardview";
     }
 
@@ -98,8 +98,9 @@ public class BoardController {
         }
 //        컨트롤러 외의 서비스에서 인증정보 필요할 땐 컨텍스트홀더 사용
 //        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+        Integer view = 0;
         String username = authentication.getName();
-        boardService.save(board, username, file);
+        boardService.save(board, username, file, view);
 //        boardRepository.save(board);
         model.addAttribute("message", "글 작성이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/list");
@@ -109,7 +110,8 @@ public class BoardController {
 
     @GetMapping("/modify/{id}")
     public String modifyForm(Model model, @PathVariable Long id) {
-        model.addAttribute("board", boardService.boardView(id));
+        Board board = boardRepository.findById(id).orElse(null);
+        model.addAttribute("board", board);
         return "board/modify";
     }
 
@@ -128,7 +130,11 @@ public class BoardController {
 //        컨트롤러 외의 서비스에서 인증정보 필요할 땐 컨텍스트홀더 사용
 //        Authentication a = SecurityContextHolder.getContext().getAuthentication();
         String username = board.getUser().getUsername();
-        boardService.save(board, username, file);
+        Integer view = boardRepository.findById(board.getId()).get().getView();
+//        board.setView(view);
+//        System.out.println(board.getView());
+//        board.setView(board.getView());
+        boardService.save(board, username, file, view);
         model.addAttribute("message", "글 수정이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/list");
 //        boardRepository.save(board);
