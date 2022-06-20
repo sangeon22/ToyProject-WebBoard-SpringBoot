@@ -42,8 +42,13 @@
                     내용 에러 메세지
                 </div>
                 <br>
-                <input name="file" type="file" >
             </div>
+
+            <div class="form-group">
+                <label for="formFile" class="form-label">파일 업로드</label>
+                <input class="form-control" type="file" id="formFile" name="file">
+            </div>
+
             <div class="text-right">
                 <a class="btn btn-primary" onClick="history.go(-1)">취소</a>
 <!--                <a class="btn btn-primary" th:href="@{/board/list}">목록</a>-->
@@ -51,6 +56,7 @@
 <!--                    th:onclick="|deleteBoard(*{id})|">삭제</button>-->
                 <button type="submit" class="btn btn-primary">확인</button>
             </div>
+
         </form>
     </div>
 

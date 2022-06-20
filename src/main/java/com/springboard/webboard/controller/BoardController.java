@@ -111,6 +111,10 @@ public class BoardController {
     @GetMapping("/modify/{id}")
     public String modifyForm(Model model, @PathVariable Long id) {
         Board board = boardRepository.findById(id).orElse(null);
+//        String filename = board.getFilename();
+//        String filepath = board.getFilepath();
+//        System.out.println(filename);
+//        System.out.println(filepath);
         model.addAttribute("board", board);
         return "board/modify";
     }
@@ -134,6 +138,14 @@ public class BoardController {
 //        board.setView(view);
 //        System.out.println(board.getView());
 //        board.setView(board.getView());
+        String filename = board.getFilename();
+        String filepath = board.getFilepath();
+        System.out.println("======================");
+        System.out.println("======================");
+        System.out.println("======================");
+        System.out.println("======================");
+        System.out.println(filename);
+        System.out.println(filepath);
         boardService.save(board, username, file, view);
         model.addAttribute("message", "글 수정이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/list");
