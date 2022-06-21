@@ -66,15 +66,19 @@
         <table class="table table-striped"  >
             <thead class="table-dark">
                 <tr class="text-center">
-                    <th scope="col">회원 번호</th>
-                    <th scope="col">회원 이름</th>
+                    <th scope="col">회원번호</th>
+                    <th scope="col">이름</th>
+                    <th scope="col">생년월일</th>
+                    <th scope="col">가입 시기</th>
 
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="user : ${users}" class="text-center">
-                    <td th:text="${user.id}">회원 번호</td>
-                    <td th:text="${user.username}">회원 이름</td>
+                    <td th:text="${user.id}">회원번호</td>
+                    <td th:text="${user.username}">이름</td>
+                    <td th:text="${user.birth}">생년월일</td>
+                    <td th:text="${user.createdDate}">가입 시기</td>
                 </tr>
             </tbody>
         </table>

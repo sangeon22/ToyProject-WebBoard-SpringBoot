@@ -2,9 +2,12 @@ package com.springboard.webboard.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import sun.util.calendar.BaseCalendar;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,6 +20,7 @@ public class User extends TimeEntity{
     private String username;
     private String password;
     private Boolean enabled;
+    private String birth;
 
     @JsonIgnore
     @ManyToMany
