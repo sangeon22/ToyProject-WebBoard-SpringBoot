@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class User {
+public class User extends TimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,5 +31,6 @@ public class User {
     @JsonIgnore
     private List<Board> boards = new ArrayList<>();
 
-
+//    @OneToMany(mappedBy = "user")
+//    private List<Reply> replyList;
 }

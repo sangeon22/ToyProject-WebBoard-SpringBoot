@@ -73,8 +73,8 @@ public class BoardController {
 
     @GetMapping("/boardview")
     public String form(Model model, @RequestParam(required = false) Long id) {
-        Board board = boardRepository.findById(id).orElse(null);
         boardService.updateView(id);
+        Board board = boardRepository.findById(id).orElse(null);
         model.addAttribute("board", board);
 //        model.addAttribute("view", boardService.updateView(id));
         return "/board/boardview";

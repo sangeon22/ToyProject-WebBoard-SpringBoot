@@ -47,6 +47,11 @@
                     <a class="nav-link" href="#" th:href="@{/board/list}">게시판 <span class="sr-only"
                             th:if="${menu} == 'board'">(current)</span></a>
                 </li>
+
+                <li class="nav-item" th:classappend="${menu} == 'userlist' ? 'active'">
+                    <a class="nav-link" href="#" th:href="@{/users/userlist}">회원 목록 <span class="sr-only"
+                                                                                    th:if="${menu} == 'userlist'">(current)</span></a>
+                </li>
 <!--                <li class="nav-item">-->
 <!--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
 <!--                </li>-->

@@ -79,16 +79,30 @@
             <!--                </div>-->
             <!--            </form>-->
             <!--        </div>-->
+
+            <br>
+
+            <div class="input-group mb-3">
+                <form id="reply" action="#" th:action="@{/reply/write}" method="post">
+                    <input type="text" id="content" name="content" class="form-control" placeholder="댓글을 입력해주세요.." aria-label="댓글을 입력해주세요.." aria-describedby="basic-addon2">
+                    <input type="hidden" id="board_id" name="board_id" th:value="${board.id}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">등록</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="text-right">
                 <a class="btn btn-secondary" th:href="@{/board/list}">뒤로 가기</a>
                 <a class="btn btn-primary" th:href="@{/board/modify/{id}(id = ${board.id})}">수정</a>
                 <!--                <button type="submit" class="btn btn-primary">수정</button>-->
                 <!--                sec:authorize="isAuthenticated() and (( #board.user.username == principal.getUsername()) or hasRole('ROLE_ADMIN'))"-->
-<!--                sec:authorize="hasRole('ROLE_ADMIN')"-->
+                <!--                sec:authorize="hasRole('ROLE_ADMIN')"-->
                 <button type="button" class="btn btn-danger"
-                    th:onclick="|deleteBoard(*{id})|">삭제</button>
+                        th:onclick="|deleteBoard(*{id})|">삭제</button>
             </div>
             <br>
+
         </form>
     </div>
 

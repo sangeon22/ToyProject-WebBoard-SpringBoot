@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,7 +35,6 @@ public class Board extends TimeEntity{
 
     private Integer view;
 
-//    @Column(columnDefinition = "integer default 0", nullable = false)
-//    private int view;
-
+//    @OneToMany(mappedBy = "board")
+//    private List<Reply> reply;
 }
