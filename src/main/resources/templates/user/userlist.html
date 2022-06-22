@@ -50,7 +50,7 @@
             </div>-->
     </nav>
 
-    <div class="container">
+    <div class="container"  sec:authorize="hasRole('ROLE_ADMIN')">
         <h2>회원 목록</h2>
         <div>총 회원 수 : <span th:text="${#lists.size(users)}"></span></div>
 
