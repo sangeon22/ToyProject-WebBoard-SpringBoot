@@ -22,6 +22,7 @@ public class Board extends TimeEntity{
     @NotNull
     @Size(min = 2, max = 30, message = "제목을 2자이상 30자 이하로 입력해주세요.")
     private String title;
+
     private String content;
 
     @ManyToOne
