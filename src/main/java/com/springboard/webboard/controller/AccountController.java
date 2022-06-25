@@ -1,5 +1,6 @@
 package com.springboard.webboard.controller;
 
+import com.springboard.webboard.dto.UserDto;
 import com.springboard.webboard.entity.User;
 import com.springboard.webboard.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,22 +37,30 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid User user,
+    public String register(@Valid UserDto userDto,
                            BindingResult bindingResult,
                            Model model
                            ){
         if(bindingResult.hasErrors()){
-            model.addAttribute("user", user);
+            model.addAttribute("UserDto", userDto);
             Map<String, String> errorMap = new HashMap<>();
 
             for(FieldError error : bindingResult.getFieldErrors()) {
                 errorMap.put("valid_"+error.getField(), error.getDefaultMessage());
                 log.info("error message : "+error.getDefaultMessage());
             }
-
             return "/account/register";
+
+        }else {
+            userService.save(userDto);
+            model.addAttribute("message", "회원가입이 완료되었습니다.");
+            model.addAttribute("searchUrl", "/");
+            return "redirect:/";
         }
-        userService.save(user);
-        return "redirect:/";
+
     }
+
+
+
+
 }
