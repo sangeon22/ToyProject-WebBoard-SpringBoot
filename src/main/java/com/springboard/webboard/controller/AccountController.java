@@ -32,7 +32,7 @@ public class AccountController {
 
     @GetMapping("/register")
     public String register(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("userDto", new User());
         return "account/register";
     }
 
@@ -42,7 +42,7 @@ public class AccountController {
                            Model model
                            ){
         if(bindingResult.hasErrors()){
-            model.addAttribute("UserDto", userDto);
+            model.addAttribute("userDto", userDto);
             Map<String, String> errorMap = new HashMap<>();
 
             for(FieldError error : bindingResult.getFieldErrors()) {
