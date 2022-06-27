@@ -1,5 +1,6 @@
 package com.springboard.webboard.service;
 
+import com.springboard.webboard.dto.BoardDto;
 import com.springboard.webboard.entity.Board;
 import com.springboard.webboard.entity.User;
 import com.springboard.webboard.repository.BoardRepository;
@@ -24,10 +25,13 @@ public class BoardService {
     private UserRepository userRepository;
 
     @Transactional
-    public void save(Board board,
+    public void save(BoardDto boardDto,
                      String username,
                      MultipartFile file,
                      Integer view) throws IOException {
+
+        Board board = boardDto.toEntity();
+
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
         if (!file.getOriginalFilename().equals("")) {
@@ -66,4 +70,26 @@ public class BoardService {
     public int updateView(Long id) {
         return boardRepository.updateView(id);
     }
+
+    @Transactional
+    public BoardDto getPost(Long id) {
+        Optional<Board> boardWrapper = boardRepository.findById(id);
+        if(boardWrapper.isPresent())
+        {
+            Board board = boardWrapper.get();
+
+            BoardDto boardDto = BoardDto.builder()
+                    .id(board.getId())
+                    .title(board.getTitle())
+                    .content(board.getContent())
+                    .filename(board.getFilename())
+                    .filepath(board.getFilepath())
+                    .build();
+
+            return boardDto;
+        }
+
+        return null;
+    }
+
 }

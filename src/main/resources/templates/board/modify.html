@@ -22,9 +22,9 @@
         <h2>게시판</h2>
         <br>
 
-        <form action="#" th:action="@{/board/modify/{id}(id = ${board.id})}" th:object="${board}" method="post" enctype="multipart/form-data">
+        <form action="#" th:action="@{/board/modify/{id}(id = ${boardDto.id})}" th:object="${boardDto}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}">
-            <input type="hidden"  th:field="${board.user.username}">
+<!--            <input type="hidden"  th:field="${boardDto.user.username}">-->
 
             <div class="form-group">
                 <label for="title">제목</label>
