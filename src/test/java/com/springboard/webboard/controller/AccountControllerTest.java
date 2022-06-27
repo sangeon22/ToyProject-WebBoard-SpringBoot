@@ -27,7 +27,7 @@ class AccountControllerTest {
     @Rollback(false)
     public void joinMember(){
         UserDto userDto = new UserDto();
-        userDto.setUsername("testuser16");
+        userDto.setUsername("testuser22");
         userDto.setPassword("xptmxm123!");
         userDto.setBirth("19951218");
 

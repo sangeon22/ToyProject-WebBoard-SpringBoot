@@ -40,9 +40,7 @@ public class User extends TimeEntity {
     @JsonIgnore
     private List<Board> boards = new ArrayList<>();
 
-    public User(){
-
-    }
+    public User(){}
 
     @Builder
     public User(String username, String password, String birth, Boolean enabled) {
