@@ -52,6 +52,12 @@
                     <a class="nav-link" href="#" th:href="@{/users/userlist}"  sec:authorize="hasRole('ROLE_ADMIN')">회원 목록 <span class="sr-only"
                                                                                     th:if="${menu} == 'userlist'">(current)</span></a>
                 </li>
+
+                <ul class="navbar-nav ml">
+                    <li class="nav-item" th:classappend="${menu} == 'mypage' ? 'active'">
+                        <a class="nav-link" href="#" th:href="@{/user/mypage}" sec:authorize="authenticated">마이페이지 <span class="sr-only" th:if="${menu} == 'mypage'">(current)</span></a>
+                    </li>
+                </ul>
 <!--                <li class="nav-item">-->
 <!--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
 <!--                </li>-->
