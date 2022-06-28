@@ -5,6 +5,7 @@ import com.springboard.webboard.entity.TimeEntity;
 import com.springboard.webboard.entity.User;
 import lombok.*;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class BoardDto{
+public class BoardDto {
 
     private Long id;
 
@@ -50,7 +51,7 @@ public class BoardDto{
         this.user = user;
     }
 
-    public Board toEntity(){
+    public Board toEntity() {
         Board build = Board.builder()
                 .id(id)
                 .title(title)
@@ -62,4 +63,18 @@ public class BoardDto{
         return build;
     }
 
+    public Page<BoardDto> toDtoList(Page<Board> boards) {
+        Page<BoardDto> boardDtoList = boards.map(m -> BoardDto.builder()
+                .id(m.getId())
+                .title(m.getTitle())
+                .content(m.getContent())
+                .filename(m.getFilename())
+                .filepath(m.getFilepath())
+                .view(m.getView())
+                .user(m.getUser())
+                .createdDate(m.getCreatedDate())
+                .modifiedDate(m.getModifiedDate())
+                .build());
+        return boardDtoList;
+    }
 }

@@ -6,12 +6,17 @@ import com.springboard.webboard.entity.User;
 import com.springboard.webboard.repository.BoardRepository;
 import com.springboard.webboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,6 +28,37 @@ public class BoardService {
 
     @Autowired
     private UserRepository userRepository;
+
+
+    @Transactional
+    public Page<BoardDto> getList(Pageable pageable, String searchKeyword){
+        Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchKeyword, searchKeyword, pageable);
+        Page<BoardDto> boardDtoList = new BoardDto().toDtoList(boards); // Page<Entity> -> Page<Dto> 변환.
+
+        return boardDtoList;
+    }
+
+//    @Transactional
+//    public Page<BoardDto> getList(Pageable pageable, String searchKeyword){
+//        Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchKeyword, searchKeyword, pageable);
+//
+//        Page<BoardDto> boardDtoList =  new PageImpl<>(new ArrayList<>());
+//        for(Board board : boards){
+//            BoardDto boardDto = BoardDto.builder()
+//                    .id(board.getId())
+//                    .title(board.getTitle())
+//                    .content(board.getContent())
+//                    .filename(board.getFilename())
+//                    .filepath(board.getFilepath())
+//                    .createdDate(board.getCreatedDate())
+//                    .modifiedDate(board.getModifiedDate())
+//                    .user(board.getUser())
+//                    .build();
+//
+//            boardDtoList.add(boardDto);
+//        }
+//        return boardDtoList;
+//    }
 
     @Transactional
     public void save(BoardDto boardDto,

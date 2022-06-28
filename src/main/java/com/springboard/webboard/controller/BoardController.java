@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -39,7 +40,7 @@ public class BoardController {
     @Autowired
     private BoardValidator boardValidator;
 
-    //} = "modifiedDate", direction = Sort.Direction.DESC)
+
     @GetMapping("/list")
     public String list(Model model,
                        @PageableDefault(size = 5)
@@ -49,12 +50,8 @@ public class BoardController {
                        }) Pageable pageable,
                        @RequestParam(required = false, defaultValue = "") String searchKeyword) {
 
-//        Page<Board> boards = boardRepository.findAll(pageable);
-        Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchKeyword, searchKeyword, pageable);
-//        int block = boards.getTotalPages() / 5;
-//        if (boards.getTotalPages() % 5 != 0) {
-//            block++;
-//        }
+
+        Page<BoardDto> boards = boardService.getList(pageable, searchKeyword);
         int block = 5;
         int startBlockPage = ((boards.getPageable().getPageNumber()) / block) * block + 1;
         int endBlockPage = startBlockPage + block - 1;
@@ -77,16 +74,13 @@ public class BoardController {
         BoardDto boardDto = boardService.getPost(id);
         boardService.updateView(id);
         boardDto.setView(boardService.boardView(id) + 1);
-
-        String username = boardDto.getUser().getUsername();
-        log.info("============================");
-        log.info("============================");
-        log.info("{}", username);
-        log.info("============================");
-        log.info("============================");
-
+//        String username = boardDto.getUser().getUsername();
+//        log.info("============================");
+//        log.info("============================");
+//        log.info("{}", username);
+//        log.info("============================");
+//        log.info("============================");
         model.addAttribute("boardDto", boardDto);
-//        model.addAttribute("view", boardService.updateView(id));
         return "/board/boardview";
     }
 
@@ -118,14 +112,13 @@ public class BoardController {
 
     @GetMapping("/modify/{id}")
     public String modifyForm(@PathVariable Long id, Model model) {
-//        Board board = boardRepository.findById(id).orElse(null);
         BoardDto boardDto = boardService.getPost(id);
         model.addAttribute("boardDto", boardDto);
         return "board/modify";
     }
 
 
-    //    @PreAuthorize("isAuthenticated() and (( # boardRepository.findById(boardDto.getId()).get() == principal.username) or hasRole('ROLE_ADMIN'))")
+    //    @PreAuthorize("isAuthenticated() and (( #boardDto.user.getUsername() == principal.username) or hasRole('ROLE_ADMIN'))")
     @PostMapping("/modify/{id}")
     public String modify(@Valid BoardDto boardDto,
                          BindingResult bindingResult,
@@ -143,7 +136,6 @@ public class BoardController {
         boardService.save(boardDto, username, file, view);
         model.addAttribute("message", "글 수정이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/list");
-//        boardRepository.save(board);
 
         return "board/message";
     }
