@@ -22,26 +22,25 @@
         <h2>게시판</h2>
         <br>
 
-        <form action="#" th:action="@{/board/boardview}" th:object="${board}" method="post">
+        <form action="#" th:action="@{/board/boardview}" th:object="${boardDto}" method="post">
             <input type="hidden" th:field="*{id}">
-            <input type="hidden"  th:field="${board.user.username}">
+<!--            <input type="hidden"  th:field="${boardDto.user.username}">-->
 
             <div class="form-group">
                 <label for="inp-type-5" >작성 시간</label>
                 <!--                <label for="inp-type-5" class="col-sm-2 control-label" th:text="${board.modifiedDate}">등록일</label>-->
-                    <input type="text" class="form-control" th:field="${board.modifiedDate}" disabled>
+                    <input type="text" class="form-control" th:field="${boardDto.modifiedDate}" disabled>
             </div>
-
             <div class="form-group">
                 <label for="inp-type-5" >작성자</label>
                 <!--                <label for="inp-type-5" class="col-sm-2 control-label" th:text="${board.modifiedDate}">등록일</label>-->
-                <input type="text" class="form-control" th:field="${board.user.username}" disabled>
+<!--                <input type="text" class="form-control" th:field="${boardDto.user.username}" disabled>-->
             </div>
 
             <div class="form-group">
                 <label for="inp-type-5" >조회수</label>
                 <!--                <label for="inp-type-5" class="col-sm-2 control-label" th:text="${board.modifiedDate}">등록일</label>-->
-                <input type="text" class="form-control" th:field="${board.view}" disabled>
+                <input type="text" class="form-control" th:field="${boardDto.view}" disabled>
             </div>
             <div class="form-group">
                 <!--                <p th:text="${board.title}">내용이 들어갈 부분입니다.</p>-->
@@ -54,10 +53,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <img th:if="${board.filename} != null" ? th:src="@{${board.filepath}}" class="img-fluid"
+                <img th:if="${boardDto.filename} != null" ? th:src="@{${boardDto.filepath}}" class="img-fluid"
                     alt="Responsive image" onerror="this.style.display='none'">
                 <div class="text-right">
-                    <a th:if="${board.filename} != null" ? th:href="@{${board.filepath}}">파일 다운</a>
+                    <a th:if="${boardDto.filename} != null" ? th:href="@{${boardDto.filepath}}">파일 다운</a>
                 </div>
             </div>
 
@@ -85,7 +84,7 @@
             <div class="input-group mb-3">
                 <form id="reply" action="#" th:action="@{/reply/write}" method="post">
                     <input type="text" id="content" name="content" class="form-control" placeholder="댓글을 입력해주세요.." aria-label="댓글을 입력해주세요.." aria-describedby="basic-addon2">
-                    <input type="hidden" id="board_id" name="board_id" th:value="${board.id}">
+                    <input type="hidden" id="board_id" name="board_id" th:value="${boardDto.id}">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit">등록</button>
                     </div>
@@ -94,7 +93,7 @@
 
             <div class="text-right">
                 <a class="btn btn-secondary" th:href="@{/board/list}">뒤로 가기</a>
-                <a class="btn btn-primary" th:href="@{/board/modify/{id}(id = ${board.id})}">수정</a>
+                <a class="btn btn-primary" th:href="@{/board/modify/{id}(id = ${boardDto.id})}">수정</a>
                 <!--                <button type="submit" class="btn btn-primary">수정</button>-->
                 <!--                sec:authorize="isAuthenticated() and (( #board.user.username == principal.getUsername()) or hasRole('ROLE_ADMIN'))"-->
                 <!--                sec:authorize="hasRole('ROLE_ADMIN')"-->

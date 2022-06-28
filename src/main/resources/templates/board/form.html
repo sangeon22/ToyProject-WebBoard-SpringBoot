@@ -22,7 +22,7 @@
         <h2>게시판</h2>
         <br>
 
-        <form action="#" th:action="@{/board/form}" th:object="${board}" method="post" enctype="multipart/form-data">
+        <form action="#" th:action="@{/board/form}" th:object="${boardDto}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}">
 
             <div class="form-group">

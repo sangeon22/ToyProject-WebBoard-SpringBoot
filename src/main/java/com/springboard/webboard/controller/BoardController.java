@@ -1,6 +1,7 @@
 package com.springboard.webboard.controller;
 
 import com.springboard.webboard.dto.BoardDto;
+import com.springboard.webboard.dto.BoardViewDto;
 import com.springboard.webboard.entity.Board;
 import com.springboard.webboard.repository.BoardRepository;
 import com.springboard.webboard.service.BoardService;
@@ -72,17 +73,19 @@ public class BoardController {
     }
 
     @GetMapping("/boardview")
-    public String form(Model model, @RequestParam(required = false) Long id) {
+    public String form(@RequestParam(required = false) Long id, Model model) {
+        BoardDto boardDto = boardService.getPost(id);
         boardService.updateView(id);
-        Board board = boardRepository.findById(id).orElse(null);
-        model.addAttribute("board", board);
+        boardDto.setView(boardService.boardView(id) + 1);
+
+        model.addAttribute("boardDto", boardDto);
 //        model.addAttribute("view", boardService.updateView(id));
         return "/board/boardview";
     }
 
     @GetMapping("/form")
     public String form(Model model) {
-        model.addAttribute("board", new BoardDto());
+        model.addAttribute("boardDto", new BoardDto());
         return "board/form";
     }
 
@@ -95,8 +98,7 @@ public class BoardController {
         boardValidator.validate(boardDto, bindingResult);
         if (bindingResult.hasErrors()) {
             return "board/form";
-        }
-        else {
+        } else {
             Integer view = 0;
             String username = authentication.getName();
             boardService.save(boardDto, username, file, view);
@@ -116,7 +118,7 @@ public class BoardController {
     }
 
 
-    @PreAuthorize("isAuthenticated() and (( #boardDto.toEntity() == principal.authorities) or hasRole('ROLE_ADMIN'))")
+    //    @PreAuthorize("isAuthenticated() and (( # boardRepository.findById(boardDto.getId()).get() == principal.username) or hasRole('ROLE_ADMIN'))")
     @PostMapping("/modify/{id}")
     public String modify(@Valid BoardDto boardDto,
                          BindingResult bindingResult,

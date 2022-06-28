@@ -52,8 +52,8 @@ public class BoardService {
     }
 
     @Transactional
-    public Board boardView(Long id) {
-        return boardRepository.findById(id).get();
+    public Integer boardView(Long id) {
+        return boardRepository.findById(id).get().getView();
     }
 
     @Transactional
@@ -84,6 +84,8 @@ public class BoardService {
                     .content(board.getContent())
                     .filename(board.getFilename())
                     .filepath(board.getFilepath())
+                    .createdDate(board.getCreatedDate())
+                    .modifiedDate(board.getModifiedDate())
                     .build();
 
             return boardDto;

@@ -79,7 +79,7 @@
             <td><a th:text="${board.title}" th:href="@{/board/boardview(id=${board.id})}">제목</a></td>
             <td th:text="${board.user.username}">작성자</td>
             <td th:text="${board.view}">조회수</td>
-            <td th:text="${board.modifiedDate}==null ? ${board.createdDate} : ${board.modifiedDate}">작성시간</td>
+            <td th:text="${#temporals.format(board.modifiedDate, 'yyyy-MM-dd HH:mm')}">작성시간</td>
             <!--                    <td th:text="${board.modifiedDate}">작성시간</td>-->
             <!--                    <td><div th:if="${board.modifiedDate} != null" th:text="${board.modifiedDate}">작성시간</div>-->
             <!--                        <div th:unless="${board.modifiedDate} == null" th:text="${board.createdDate}">사용안함</div></td>-->
