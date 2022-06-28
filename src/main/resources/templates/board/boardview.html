@@ -24,7 +24,7 @@
 
         <form action="#" th:action="@{/board/boardview}" th:object="${boardDto}" method="post">
             <input type="hidden" th:field="*{id}">
-<!--            <input type="hidden"  th:field="${boardDto.user.username}">-->
+            <input type="hidden"  th:field="${boardDto.user.username}">
 
             <div class="form-group">
                 <label for="inp-type-5" >작성 시간</label>
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="inp-type-5" >작성자</label>
                 <!--                <label for="inp-type-5" class="col-sm-2 control-label" th:text="${board.modifiedDate}">등록일</label>-->
-<!--                <input type="text" class="form-control" th:field="${boardDto.user.username}" disabled>-->
+                <input type="text" class="form-control" th:field="${boardDto.user.username}" disabled>
             </div>
 
             <div class="form-group">

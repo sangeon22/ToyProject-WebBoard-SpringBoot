@@ -86,6 +86,7 @@ public class BoardService {
                     .filepath(board.getFilepath())
                     .createdDate(board.getCreatedDate())
                     .modifiedDate(board.getModifiedDate())
+                    .user(board.getUser())
                     .build();
 
             return boardDto;

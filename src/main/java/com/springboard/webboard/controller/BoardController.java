@@ -78,6 +78,13 @@ public class BoardController {
         boardService.updateView(id);
         boardDto.setView(boardService.boardView(id) + 1);
 
+        String username = boardDto.getUser().getUsername();
+        log.info("============================");
+        log.info("============================");
+        log.info("{}", username);
+        log.info("============================");
+        log.info("============================");
+
         model.addAttribute("boardDto", boardDto);
 //        model.addAttribute("view", boardService.updateView(id));
         return "/board/boardview";

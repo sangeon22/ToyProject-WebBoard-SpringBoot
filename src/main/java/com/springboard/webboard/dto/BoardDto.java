@@ -34,9 +34,11 @@ public class BoardDto{
 
     private LocalDateTime modifiedDate;
 
+    private User user;
+
 
     @Builder
-    public BoardDto(Long id, String title, String content, String filename, String filepath, Integer view, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public BoardDto(Long id, String title, String content, String filename, String filepath, Integer view, LocalDateTime createdDate, LocalDateTime modifiedDate, User user) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -45,6 +47,7 @@ public class BoardDto{
         this.view = view;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
+        this.user = user;
     }
 
     public Board toEntity(){
