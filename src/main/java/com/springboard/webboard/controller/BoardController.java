@@ -21,8 +21,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,26 +120,31 @@ public class BoardController {
     }
 
 
-    //    @PreAuthorize("isAuthenticated() and (( #boardDto.user.getUsername() == principal.username) or hasRole('ROLE_ADMIN'))")
+    //    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modify/{id}")
     public String modify(@Valid BoardDto boardDto,
                          BindingResult bindingResult,
                          Authentication authentication,
                          MultipartFile file,
+                         HttpServletRequest request,
                          Model model) throws IOException {
-        boardValidator.validate(boardDto, bindingResult);
 
+        boardValidator.validate(boardDto, bindingResult);
         if (bindingResult.hasErrors()) {
             return "board/modify";
         }
         String username = boardRepository.findById(boardDto.getId()).get().getUser().getUsername();
         Integer view = boardRepository.findById(boardDto.getId()).get().getView();
-
-        boardService.save(boardDto, username, file, view);
-        model.addAttribute("message", "글 수정이 완료되었습니다.");
-        model.addAttribute("searchUrl", "/board/list");
-
-        return "board/message";
+        if (authentication.getName().equals(username) || request.isUserInRole("ROLE_ADMIN")) {
+            boardService.save(boardDto, username, file, view);
+            model.addAttribute("message", "글 수정이 완료되었습니다.");
+            model.addAttribute("searchUrl", "/board/list");
+            return "board/message";
+        } else {
+            model.addAttribute("message", "수정 권한x");
+            model.addAttribute("searchUrl", "/board/list");
+            return "board/message";
+        }
     }
 
 
