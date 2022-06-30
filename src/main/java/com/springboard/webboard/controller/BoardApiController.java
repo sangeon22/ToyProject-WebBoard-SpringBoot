@@ -2,20 +2,20 @@ package com.springboard.webboard.controller;
 
 import java.util.List;
 
+import com.springboard.webboard.dto.BoardDto;
 import com.springboard.webboard.entity.Board;
-import com.springboard.webboard.entity.User;
 import com.springboard.webboard.repository.BoardRepository;
 import com.springboard.webboard.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import org.thymeleaf.util.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @Slf4j
@@ -72,26 +72,22 @@ class BoardApiController {
 
     //    @Secured("ROLE_ADMIN")
 //    @PreAuthorize("isAuthenticated() and (( #board.user.username == principal.getUsername()) or hasRole('ROLE_ADMIN'))")
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/boards/{id}")
-    void deleteBoard(@PathVariable Long id,
-                     Authentication authentication) {
-//        System.out.println(board.getUser().getUsername());
-//        Board board = boardRepository.findById(id).orElse(null);
-//        log.info("--------------------------------");
-//        log.info(board.getUser().getUsername());
-//        log.info("--------------------------------");
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    ResponseEntity deleteBoard(@PathVariable Long id,
+                     BoardDto boardDto,
+                     Authentication authentication,
+                     HttpServletRequest request,
+                     Model model) {
+        String username = boardRepository.findById(boardDto.getId()).get().getUser().getUsername();
+        if (authentication.getName().equals(username) || request.isUserInRole("ROLE_ADMIN")) {
+            boardService.deleteById(id);
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.FORBIDDEN);
+        }
 
-
-//        this.boardService.findById(id)
-//                .ifPresent(board -> {
-//                    if (board.getUser().getUsername().equals(authentication.getPrincipal().getClass().getName())) {
-//                        this.boardService.deleteById(id);
-//                    } else {
-//                        throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-//                    }
-//                });
     }
-
 }
+http://localhost:8090/board/boardview?id=208
+http://localhost:8090/board/boradview?id=208

@@ -118,6 +118,10 @@
                     console.log('result', result);
                     alert('글 삭제가 완료되었습니다.');
                     window.location.href = '/board/list';
+                },
+                error: function () {
+                    alert("해당 게시글 삭제 권한이 없습니다.")
+                    window.location.href = '/board/boardview?id='+ id;
                 }
             });
         }
