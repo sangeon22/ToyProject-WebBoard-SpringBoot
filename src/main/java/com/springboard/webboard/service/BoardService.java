@@ -38,27 +38,6 @@ public class BoardService {
         return boardDtoList;
     }
 
-//    @Transactional
-//    public Page<BoardDto> getList(Pageable pageable, String searchKeyword){
-//        Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchKeyword, searchKeyword, pageable);
-//
-//        Page<BoardDto> boardDtoList =  new PageImpl<>(new ArrayList<>());
-//        for(Board board : boards){
-//            BoardDto boardDto = BoardDto.builder()
-//                    .id(board.getId())
-//                    .title(board.getTitle())
-//                    .content(board.getContent())
-//                    .filename(board.getFilename())
-//                    .filepath(board.getFilepath())
-//                    .createdDate(board.getCreatedDate())
-//                    .modifiedDate(board.getModifiedDate())
-//                    .user(board.getUser())
-//                    .build();
-//
-//            boardDtoList.add(boardDto);
-//        }
-//        return boardDtoList;
-//    }
 
     @Transactional
     public void save(BoardDto boardDto,

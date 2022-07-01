@@ -89,5 +89,3 @@ class BoardApiController {
 
     }
 }
-http://localhost:8090/board/boardview?id=208
-http://localhost:8090/board/boradview?id=208

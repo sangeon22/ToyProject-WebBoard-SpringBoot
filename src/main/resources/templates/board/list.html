@@ -77,7 +77,7 @@
         <tr th:each="board : ${boards}" class="text-center">
             <td th:text="${board.id}">id</td>
             <td><a th:text="${board.title}" th:href="@{/board/boardview(id=${board.id})}">제목</a></td>
-<!--            <td th:text="${board.user.username}">작성자</td>-->
+            <td th:text="${board.user.username}">작성자</td>
             <td th:text="${board.view}">조회수</td>
             <td th:text="${#temporals.format(board.modifiedDate, 'yyyy-MM-dd HH:mm')}">작성시간</td>
             <!--                    <td th:text="${board.modifiedDate}">작성시간</td>-->
