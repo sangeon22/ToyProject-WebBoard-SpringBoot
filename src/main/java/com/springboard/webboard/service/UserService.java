@@ -5,10 +5,13 @@ import com.springboard.webboard.entity.Role;
 import com.springboard.webboard.entity.User;
 import com.springboard.webboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -18,6 +21,25 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public UserDto findUser(String username) {
+        User userWrapper = userRepository.findByUsername(username);
+        if ( userWrapper != null ) {
+            UserDto userDto = UserDto.builder()
+                    .username(userWrapper.getUsername())
+                    .birth(userWrapper.getBirth())
+                    .build();
+
+            return userDto;
+        }
+
+        return null;
+    }
+
 
     public User save(UserDto userDto) {
         User input_username = userRepository.findByUsername(userDto.getUsername());
@@ -40,7 +62,18 @@ public class UserService {
 
     }
 
+    @Transactional
     public List getlist(String searchKeyword) {
-        return  userRepository.findByUsernameJPQLQuery(searchKeyword);
+        return userRepository.findByUsernameJPQLQuery(searchKeyword);
     }
+
+//    @Transactional
+//    public Long updateInfo(String username, String newName, String birth){
+//        User user  = userRepository.findByUsername(username)
+//                .orElseThrow(()-> new UsernameNotFoundException(username));
+//
+//        user.setUsername(newName);
+//        user.setBirth(birth);
+//        return user.getId();
+//    }
 }

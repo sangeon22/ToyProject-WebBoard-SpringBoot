@@ -4,9 +4,9 @@ import com.springboard.webboard.entity.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     @EntityGraph(attributePaths = {"boards"})
@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "select * from User u where u.username like %?1%", nativeQuery = true)
     List<User> findByUsernameNativeQuery(String username);
+
+    Optional<User> findById(Long id);
 }
