@@ -141,7 +141,7 @@ public class BoardController {
             model.addAttribute("searchUrl", "/board/list");
             return "board/message";
         } else {
-            model.addAttribute("message", "수정 권한x");
+            model.addAttribute("message", "해당 게시글 수정 권한이 없습니다.");
             model.addAttribute("searchUrl", "/board/list");
             return "board/message";
         }
