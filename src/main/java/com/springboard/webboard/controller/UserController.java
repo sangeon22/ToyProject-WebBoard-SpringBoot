@@ -1,12 +1,20 @@
 package com.springboard.webboard.controller;
 
+import com.springboard.webboard.dto.BoardDto;
 import com.springboard.webboard.dto.UserDto;
 import com.springboard.webboard.entity.User;
+import com.springboard.webboard.repository.BoardRepository;
 import com.springboard.webboard.repository.UserRepository;
+import com.springboard.webboard.service.BoardService;
 import com.springboard.webboard.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.buf.UEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +36,9 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
+    private BoardService boardService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -39,6 +50,33 @@ public class UserController {
         List<UserDto> users = userService.getlist(searchKeyword);
         model.addAttribute("users", users);
         return "user/userlist";
+    }
+
+    @GetMapping("myboardlist")
+    public String myBoardList(Model model,
+                              @PageableDefault(size = 5)
+                              @SortDefault.SortDefaults({
+                                      @SortDefault(sort = "modifiedDate", direction = Sort.Direction.DESC),
+                                      @SortDefault(sort = "createdDate", direction = Sort.Direction.DESC),
+                              }) Pageable pageable,
+                              Authentication authentication){
+        Page<BoardDto> boards = boardService.getMyBoardList(pageable, authentication);
+        int block = 5;
+        int startBlockPage = ((boards.getPageable().getPageNumber()) / block) * block + 1;
+        int endBlockPage = startBlockPage + block - 1;
+        if (endBlockPage > boards.getTotalPages()) {
+            endBlockPage = boards.getTotalPages();
+        }
+//        int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4);
+//        int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 4);
+
+//        int startPage = 1;
+//        int endPage = boards.getTotalPages();
+        model.addAttribute("startPage", startBlockPage);
+        model.addAttribute("endPage", endBlockPage);
+        model.addAttribute("boards", boards);
+
+        return "user/myboardlist";
     }
 
     @GetMapping("/mypage/my")

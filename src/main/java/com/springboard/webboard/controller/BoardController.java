@@ -71,6 +71,7 @@ public class BoardController {
         return "board/list";
     }
 
+
     @GetMapping("/boardview")
     public String form(@RequestParam(required = false) Long id, Model model) {
         BoardDto boardDto = boardService.getPost(id);

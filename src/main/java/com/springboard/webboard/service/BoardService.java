@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +39,13 @@ public class BoardService {
         return boardDtoList;
     }
 
+    @Transactional
+    public Page<BoardDto> getMyBoardList(Pageable pageable, Authentication authentication){
+        Page<Board> boards = boardRepository.userBoardList(authentication.getName(), pageable);
+        Page<BoardDto> boardDtoList = new BoardDto().toDtoList(boards);
+
+        return boardDtoList;
+    }
 
     @Transactional
     public void save(BoardDto boardDto,
