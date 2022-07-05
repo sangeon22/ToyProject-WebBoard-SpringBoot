@@ -65,15 +65,19 @@
     <script>
         function deleteUser(id) {
             //DELETE /api/users/{id}
-            $.ajax({
-                url: '/api/users/' + id,
-                type: 'DELETE',
-                success: function (result) {
-                    console.log('result', result);
-                    alert('회원 탈퇴가 완료되었습니다.');
-                    window.location.href = '/';
-                }
-            });
+            if (!confirm("댓글을 수정하시겠습니까?")) {
+                return false;
+            } else {
+                $.ajax({
+                    url: '/api/users/' + id,
+                    type: 'DELETE',
+                    success: function (result) {
+                        console.log('result', result);
+                        alert('회원 탈퇴가 완료되었습니다.');
+                        window.location.href = '/';
+                    }
+                });
+            }
         }
     </script>
 </body>
