@@ -21,12 +21,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -59,7 +63,7 @@ public class UserController {
                                       @SortDefault(sort = "modifiedDate", direction = Sort.Direction.DESC),
                                       @SortDefault(sort = "createdDate", direction = Sort.Direction.DESC),
                               }) Pageable pageable,
-                              Authentication authentication){
+                              Authentication authentication) {
         Page<BoardDto> boards = boardService.getMyBoardList(pageable, authentication);
         int block = 5;
         int startBlockPage = ((boards.getPageable().getPageNumber()) / block) * block + 1;
@@ -79,10 +83,6 @@ public class UserController {
         return "user/myboardlist";
     }
 
-    @GetMapping("/mypage/my")
-    public String myPage() {
-        return "user/mypage";
-    }
 
     @GetMapping("/mypage")
     public String loginForm(Model model, Authentication authentication) {
@@ -107,9 +107,32 @@ public class UserController {
             model.addAttribute("searchUrl", "/users/mypage");
             return "board/message";
         }
-
-
     }
+
+
+//    @PostMapping("/mypage/myinfo")
+//    public String myInfo(@Valid UserDto userDto,
+//                         BindingResult bindingResult,
+//                         Model model) {
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("userDto", userDto);
+//            Map<String, String> errorMap = new HashMap<>();
+//
+//            for (FieldError error : bindingResult.getFieldErrors()) {
+//                errorMap.put("valid_" + error.getField(), error.getDefaultMessage());
+//                log.info("error message : " + error.getDefaultMessage());
+//            }
+//            return "/users/mypage";
+//
+//        } else {
+//            model.addAttribute("userDto", userDto);
+//            model.addAttribute("message", "회원정보가 수정되었습니다.");
+//            model.addAttribute("searchUrl", "/");
+//            return "redirect:/";
+//        }
+//
+//    }
+//}
 
 
 //    @PostMapping("/mypage/my")

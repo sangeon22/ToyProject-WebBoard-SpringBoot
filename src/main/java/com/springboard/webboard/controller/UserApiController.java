@@ -3,9 +3,11 @@ package com.springboard.webboard.controller;
 import com.springboard.webboard.entity.Board;
 import com.springboard.webboard.entity.User;
 import com.springboard.webboard.repository.UserRepository;
+import com.springboard.webboard.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,9 @@ import java.util.List;
 class UserApiController {
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -63,7 +68,9 @@ class UserApiController {
     }
 
     @DeleteMapping("/users/{id}")
-    void deleteUser(@PathVariable Long id) {
-        repository.deleteById(id);
+    String deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        SecurityContextHolder.clearContext();
+        return "/";
     }
 }

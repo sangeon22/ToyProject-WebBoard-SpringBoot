@@ -1,8 +1,10 @@
 package com.springboard.webboard.service;
 
 import com.springboard.webboard.dto.UserDto;
+import com.springboard.webboard.entity.Board;
 import com.springboard.webboard.entity.Role;
 import com.springboard.webboard.entity.User;
+import com.springboard.webboard.repository.BoardRepository;
 import com.springboard.webboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,16 +22,20 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BoardRepository boardRepository;
 
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public UserDto findUser(String username) {
         User userWrapper = userRepository.findByUsername(username);
-        if ( userWrapper != null ) {
+        if (userWrapper != null) {
             UserDto userDto = UserDto.builder()
+                    .id(userWrapper.getId())
                     .username(userWrapper.getUsername())
                     .birth(userWrapper.getBirth())
                     .build();
@@ -67,6 +73,19 @@ public class UserService {
         return userRepository.findByUsernameJPQLQuery(searchKeyword);
     }
 
+    @Transactional
+    public void deleteUser(Long id) {
+        String username = userRepository.findById(id).get().getUsername();
+        User user = userRepository.findByUsername(username);
+        if (!user.getBoards().isEmpty()) {
+            for (Board board : user.getBoards()) {
+                boardRepository.deleteById(board.getId());
+            }
+        }
+        userRepository.deleteById(id);
+
+    }
+
 //    @Transactional
 //    public Long updateInfo(String username, String newName, String birth){
 //        User user  = userRepository.findByUsername(username)
@@ -76,4 +95,6 @@ public class UserService {
 //        user.setBirth(birth);
 //        return user.getId();
 //    }
+
+
 }

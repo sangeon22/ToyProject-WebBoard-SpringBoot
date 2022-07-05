@@ -17,6 +17,8 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 public class UserDto {
 
+    private Long id;
+
     @NotBlank(message = "아이디는 필수 입력값입니다.")
     @Pattern(regexp = "^[a-z0-9]{4,20}$", message = "입력하신 아이디는 아래의 형식에 맞지 않습니다.")
     private String username;
@@ -30,8 +32,11 @@ public class UserDto {
     private String birth;
 
 
+
+
     @Builder
-    public UserDto(String username, String password, String birth) {
+    public UserDto(Long id, String username, String password, String birth) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.birth = birth;

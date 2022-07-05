@@ -23,7 +23,7 @@
                 <h2>개인정보 수정</h2>
             </div>
             <br>
-            <form role="form" th:action="@{/mypage/my}" th:object="${userDto}" method="post">
+            <form role="form" th:action="@{/mypage/myinfo}" th:object="${userDto}" method="post">
                 <div class="form-group">
                     <label th:for="name">닉네임</label>
                     <input type="text" th:field="*{username}" class="form-control" placeholder="사용자이름을 입력하세요"
@@ -55,11 +55,27 @@
 
                 <button type="submit" class="btn btn-primary btn-lg btn-block">수정</button>
                 <a class="btn btn-secondary btn-lg btn-block" th:href="@{/users/myboardlist}">내 게시글</a>
+                <button type="button" class="btn btn-danger btn-lg btn-block" th:onclick="|deleteUser(*{id})|">회원탈퇴</button>
             </form>
         </div>
     </div>
 
         <footer th:replace="fragments/common :: footer"></footer>
+
+    <script>
+        function deleteUser(id) {
+            //DELETE /api/users/{id}
+            $.ajax({
+                url: '/api/users/' + id,
+                type: 'DELETE',
+                success: function (result) {
+                    console.log('result', result);
+                    alert('회원 탈퇴가 완료되었습니다.');
+                    window.location.href = '/';
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
