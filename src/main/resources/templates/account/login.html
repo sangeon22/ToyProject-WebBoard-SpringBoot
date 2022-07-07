@@ -35,10 +35,43 @@
     </label>
   </div> -->
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+    <br>
+
+<!--    <div>-->
+<!--      <a href="https://kauth.kakao.com/oauth/authorize?client_id=91e81f913533b4cab6ce6fd589cdbfd8&redirect_uri=http://localhost:8090/account/kakao/login&response_type=code" class="btn btn-lg btn-block">-->
+<!--        <img src="/img/kakao_login_medium_wide.png" alt="카카오 로그인" />-->
+<!--      </a>-->
+<!--    </div>-->
+
+    <br>
+      <!-- 스프링 시큐리티에서 기본 제공하는 URL - 별도 컨트롤러 작성 필요 없음 -->
+    <div th:if="${#strings.isEmpty(username)}">
+      <a href="/oauth2/authorization/google" class="btn btn-lg btn-block btn-success active" role="button">Google Login</a>
+    </div>
+
     <p class="mt-5 mb-3 text-muted">아직 회원이 아니신가요?</p>
     <a type="button" class="btn btn-outline-primary btn-block" th:href="@{/account/register}">회원가입</a>
     <p class="mt-5 mb-3 text-muted">&copy; Eonion</p>
   </form>
+
+
+<!--  <li th:text="|인가코드 = ${code}|">code</li>-->
+<!--  <li th:text="|유효토큰 = ${access_token}|">code</li>-->
+<!--  <li th:text="|사용자정보 = ${userInfo}|">code</li>-->
+<!--  <li th:text="|동의정보 = ${agreementInfo}|">code</li>-->
+<!--  <a href="https://kauth.kakao.com/oauth/logout?client_id=91e81f913533b4cab6ce6fd589cdbfd8&logout_redirect_uri=http://localhost:8090/account/kakao/login">로그아웃</a>-->
+
+<!--  <c:if test="${sessionScope.mvo eq null }">-->
+<!--    <form action="" method="post">-->
+<!--      아이디:<input name="id"/><br/>-->
+<!--      비밀번호:<input type="password"name="pw"/><br/>-->
+<!--      <input type="button" value="login"/>-->
+<!--    </form>-->
+<!--    <a href="https://kauth.kakao.com/oauth/authorize?client_id={REST_API_KEY}&redirect_uri={REDIRECT_URI}&response_type=codee">-->
+<!--      <img alt="카카오로그인버튼" src="resources/img/kakao.png"/>-->
+<!--    </a>-->
+<!--  </c:if>-->
 
 
   <footer th:replace="fragments/common :: footer"></footer>
