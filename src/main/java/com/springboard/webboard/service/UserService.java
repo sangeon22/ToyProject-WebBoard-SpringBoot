@@ -7,6 +7,8 @@ import com.springboard.webboard.entity.User;
 import com.springboard.webboard.repository.BoardRepository;
 import com.springboard.webboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,9 @@ public class UserService {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -58,6 +63,7 @@ public class UserService {
         user.setEnabled(true);
         role.setId(1L);
         user.getRoles().add(role);
+        user.generateEmailCheckToken();
 //        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
 //        user.setPassword(encodedPassword);
 //        user.setUsername(userDto.getUsername());
@@ -83,8 +89,24 @@ public class UserService {
             }
         }
         userRepository.deleteById(id);
-
     }
+
+    @Transactional
+    public void processNewUser(UserDto userDto) {
+        User user = save(userDto);
+        sendSignUpConfirmEmail(user);
+    }
+
+    private void sendSignUpConfirmEmail(User user) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(user.getEmail());
+        simpleMailMessage.setSubject("어니언 웹사이트 회원가입 메일 인증");
+        simpleMailMessage.setText("/check-email-token?token=" + user.getEmailCheckToken() + "&email=" + user.getEmail());
+        javaMailSender.send(simpleMailMessage);
+    }
+
+
+
 
 //    @Transactional
 //    public Long updateInfo(String username, String newName, String birth){

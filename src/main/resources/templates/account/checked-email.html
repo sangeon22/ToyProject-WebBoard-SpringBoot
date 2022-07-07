@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link th:href="@{/css/signin.css}" rel="stylesheet">
+
+    <title>Login</title>
+</head>
+<body class="bg-light">
+<div class="py-5 text-center" th:if="${error}">
+    <p class="lead">스터디올래 이메일 확인</p>
+    <div class="alert alert-danger" role="alert">
+        이메일 확인 링크가 정확하지 않습니다.
+    </div>
+</div>
+<div class="py-5 text-center" th:if="${error == null}">
+    <p class="lead">스터디올래 이메일 확인</p>
+
+    <small class="text-info">이제부터 가입할 때 사용할 이메일 또는 닉네임과 패스워드로 로그인할 수 있습니다.</small>
+</div>
+<script th:replace="fragments :: form-validation"></script>
+</body>
+</html>
