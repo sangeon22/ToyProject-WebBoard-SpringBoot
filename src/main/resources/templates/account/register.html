@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link th:href="@{/css/signin.css}" rel="stylesheet">
+  <link th:href="@{/css/join.css}" rel="stylesheet">
 
   <title>register</title>
 </head>
@@ -42,8 +43,8 @@
     <form class="needs-validation col-sm-6" action="#" th:action="@{/account/register}" th:object="${userDto}"
           method="post">
 
+
       <div class="form-group">
-        <label for="username">아이디</label>
         <input type="text" id="username" class="form-control" placeholder="회원아이디" th:field="*{username}"
                th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'">
         <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
@@ -58,20 +59,6 @@
       </div>
 
       <div class="form-group">
-        <label for="email">이메일</label>
-        <input type="email" id="email" class="form-control" placeholder="이메일" th:field="*{email}"
-               th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
-        <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
-          이메일 에러 메세지
-        </div>
-        <small id="emailHelp" class="form-text text-muted">
-          이메일은 OOOO@OOOO.OOO 규칙<br>
-        </small>
-
-      </div>
-
-      <div class="form-group">
-        <label for="password">비밀번호</label>
         <input type="password" id="password" class="form-control" placeholder="비밀번호" th:field="*{password}"
                th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'">
         <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
@@ -84,8 +71,7 @@
 
 
       <div class="form-group">
-        <label for="birth">생년월일</label>
-        <input type="text" id="birth" class="form-control" placeholder="생년월일(yyyyMMdd)" th:field="*{birth}"
+        <input type="text" id="birth" class="form-control" placeholder="생년월일(YYYYMMDD)" th:field="*{birth}"
                th:classappend="${#fields.hasErrors('birth')} ? 'is-invalid'">
         <div class="invalid-feedback" th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}">
           생년월일 에러 메세지
@@ -93,9 +79,32 @@
 
       </div>
 
-      <br>
       <div class="form-group">
-        <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">가입하기</button>
+        <div style="display: flex">
+          <input type="email" id="email" class="form-control" placeholder="이메일" th:field="*{email}" th:name="email" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
+          <button type="button" class="email_auth_btn" >메일 발송</button>
+        </div>
+
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+          이메일 에러 메세지
+        </div>
+
+        <small id="emailHelp" class="form-text text-muted">
+          이메일은 OOOO@OOOO.OOO 규칙<br>
+        </small>
+
+        <div style="display: flex">
+          <input type="text" id="authNum" class="form-control" placeholder="인증번호" disabled required>
+          <button type="button" class="email_auth_key" >인증번호확인</button>
+        </div>
+      </div>
+
+
+
+      <br>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp" id="formsummit" disabled>가입하기</button>
         <small id="submitHelp" class="form-text text-muted">
           <a href="#">약관</a>에 동의하시면 가입하기 버튼을 클릭하세요.
         </small>
@@ -103,32 +112,103 @@
 
 
     </form>
-  </div>
-
+  </form>
 
   <footer th:replace="fragments/common :: footer"></footer>
 
-  <script type="application/javascript" th:fragment="form-validation">
-    (function () {
-      'use strict';
 
-      window.addEventListener('load', function () {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
+<!--  <script>-->
+<!--    function checkAuthNum() {-->
+<!--      $.ajax({-->
+<!--        url: '/account/checkAuthNum',-->
+<!--        type: 'POST',-->
+<!--        success: function (result) {-->
+<!--          console.log('result', result);-->
+<!--          alert('인증 체크.');-->
+<!--        }-->
+<!--      });-->
+<!--    }-->
+<!--  </script>-->
 
-        // Loop over them and prevent submission
-        Array.prototype.filter.call(forms, function (form) {
-          form.addEventListener('submit', function (event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add('was-validated')
-          }, false)
-        })
-      }, false)
-    }())
+    <script th:inline="javascript">
+
+      /*<![CDATA[*/
+      var mailcheck = [[${mailcheck}]];
+      /*]]>*/
+
+      var code = '';
+
+    $(function() {
+
+      $(".email_auth_key").click(function(){
+        var authNum = $('#authNum').val();
+
+        if(authNum == ''){
+          alert("인증번호를 입력해주세요.");
+          alert(mailcheck)
+          return false;
+        }
+        else if(code == authNum){
+          mailcheck = true;
+          $("#formsummit").attr("disabled",false);
+          // $.ajax({
+          //   type : "GET",
+          //   url : '/account/register',
+          //   data : {
+          //     mailcheck : "true"
+          //   },
+          //   success: function(data){
+          //     alert("인증 확인");
+          //     alert("입력번호 : " + authNum);
+          //     alert("인증번호 : " + code);
+          //     alert("mailcheck : " + mailcheck);
+          //   },
+          // });
+        }
+        else {
+            mailcheck = false;
+            alert("인증번호가 틀렸습니다.");
+            alert("입력번호 : " + authNum);
+            alert("인증번호 : " + code);
+
+        }
+        alert("mailcheck : " + mailcheck);
+        // console.log("인증번호 [AuthNum] : " + AuthNum);
+        // console.log("입력값 [authNum] : " + authNum);
+      });
+
+      $(".email_auth_btn").click(function(){
+        var email = $('#email').val();
+
+        if(email == ''){
+          alert("이메일을 입력해주세요.");
+          return false;
+        }
+        else {
+            $.ajax({
+                type : "POST",
+                url : '/account/sendEmail',
+                data : {email : email},
+                async : false,
+                success: function(data){
+                  code = data
+                  $("#authNum").attr("disabled",false);
+                    alert("인증번호가 발송되었습니다.");
+                    alert("mailcheck : " + mailcheck);
+
+                  // window.location.reload();
+                },
+                error: function(data){
+                    alert("메일 발송에 실패했습니다.");
+                }
+            });
+        }
+      });
+
+
+    });
   </script>
+</div>
 </body>
 
 </html>

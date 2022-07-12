@@ -37,7 +37,7 @@ public class UserDto {
     @Pattern(regexp = "^(19[0-9][0-9]|20\\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$", message = "입력하신 생년월일은 8자리 형식에 맞지 않습니다.")
     private String birth;
 
-
+    private boolean mailCheck;
 
 
     @Builder
@@ -56,6 +56,10 @@ public class UserDto {
                 .password(new BCryptPasswordEncoder().encode(password))
                 .birth(birth)
                 .build();
+    }
+
+    public boolean setMailCheck(boolean mailCheck){
+        return this.mailCheck = mailCheck;
     }
 
 }
