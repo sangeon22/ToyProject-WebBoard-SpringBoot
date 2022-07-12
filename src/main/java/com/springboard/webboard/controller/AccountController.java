@@ -154,8 +154,8 @@ public class AccountController {
 
         //메일 관련 정보
         String host = "smtp.naver.com";
-        final String username = "tkddjsdl33"; //네이버 이메일 주소중 @ naver.com 앞주소만 작성
-        final String password = "Eonion0318!"; //네이버 이메일 비밀번호를 작성
+        final String username = ""; //네이버 이메일 주소중 @ naver.com 앞주소만 작성
+        final String password = ""; //네이버 이메일 비밀번호를 작성
         int port = 465;                      //네이버 STMP 포트 번호
 
         //메일 내용
