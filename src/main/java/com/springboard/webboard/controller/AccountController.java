@@ -161,7 +161,8 @@ public class AccountController {
         //메일 내용
         String recipient = email; //메일을 발송할 이메일 주소를 기재해 줍니다.
         String subject = "어니언 웹사이트 회원가입 인증메일";    //메일 발송시 제목을 작성
-        String body = "[인증번호] " + AuthNum + " 입니다."; //메일 발송시 내용 작성
+        String body = "어니언 웹사이트에 가입해주셔서 감사합니다.\n" +
+                "[인증번호] " + AuthNum + " 입니다."; //메일 발송시 내용 작성
 
         Properties props = System.getProperties();
 

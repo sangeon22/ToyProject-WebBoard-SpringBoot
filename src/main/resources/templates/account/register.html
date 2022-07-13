@@ -145,11 +145,13 @@
 
           if(authNum == ''){
             alert("인증번호를 입력해주세요.");
-            alert(mailcheck)
             return false;
           }
           else if(code == authNum){
             mailcheck = true;
+            alert("인증이 완료되었습니다.");
+            $("#email").attr("readonly",true);
+            $("#authNum").attr("readonly",true);
             $("#formsummit").attr("disabled",false);
             // $.ajax({
             //   type : "GET",
@@ -167,12 +169,9 @@
           }
           else {
             mailcheck = false;
-            alert("인증번호가 틀렸습니다.");
-            alert("입력번호 : " + authNum);
-            alert("인증번호 : " + code);
+            alert("인증번호가 올바르지 않습니다.");
 
           }
-          alert("mailcheck : " + mailcheck);
           // console.log("인증번호 [AuthNum] : " + AuthNum);
           // console.log("입력값 [authNum] : " + authNum);
         });
@@ -193,8 +192,7 @@
               success: function(data){
                 code = data
                 $("#authNum").attr("disabled",false);
-                alert("인증번호가 발송되었습니다.");
-                alert("mailcheck : " + mailcheck);
+                alert("입력한 이메일로 인증번호가 발송되었습니다.");
 
                 // window.location.reload();
               },
