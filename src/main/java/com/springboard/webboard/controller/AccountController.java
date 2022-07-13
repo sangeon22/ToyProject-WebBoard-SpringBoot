@@ -90,10 +90,10 @@ public class AccountController {
         }
         else {
 //            if (mailcheck.equals("true")){
-                userService.save(userDto);
-                model.addAttribute("message", "회원가입이 완료되었습니다.");
-                model.addAttribute("searchUrl", "/");
-                return "board/message";
+            userService.save(userDto);
+            model.addAttribute("message", "회원가입이 완료되었습니다.");
+            model.addAttribute("searchUrl", "/");
+            return "board/message";
 //            } else {
 //                return "/account/register";
 //            }
@@ -146,16 +146,16 @@ public class AccountController {
     @PostMapping("/sendEmail")
     @ResponseBody
     public String sendEmail(String email,
-                         HttpServletRequest request,
-                         HttpServletResponse response,
+                            HttpServletRequest request,
+                            HttpServletResponse response,
                             Model model) throws Exception {
 //        @RequestParam("email") String email,
         AuthNum = Integer.toString((int) ((Math.random() * (99999 - 10000 + 1)) + 10000));
 
         //메일 관련 정보
         String host = "smtp.naver.com";
-        final String username = ""; //네이버 이메일 주소중 @ naver.com 앞주소만 작성
-        final String password = ""; //네이버 이메일 비밀번호를 작성
+        final String username = "아이디"; //네이버 이메일 주소중 @ naver.com 앞주소만 작성
+        final String password = "비밀번호"; //네이버 이메일 비밀번호를 작성
         int port = 465;                      //네이버 STMP 포트 번호
 
         //메일 내용

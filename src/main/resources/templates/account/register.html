@@ -112,23 +112,23 @@
 
 
     </form>
-  </form>
+    </form>
 
-  <footer th:replace="fragments/common :: footer"></footer>
+    <footer th:replace="fragments/common :: footer"></footer>
 
 
-<!--  <script>-->
-<!--    function checkAuthNum() {-->
-<!--      $.ajax({-->
-<!--        url: '/account/checkAuthNum',-->
-<!--        type: 'POST',-->
-<!--        success: function (result) {-->
-<!--          console.log('result', result);-->
-<!--          alert('인증 체크.');-->
-<!--        }-->
-<!--      });-->
-<!--    }-->
-<!--  </script>-->
+    <!--  <script>-->
+    <!--    function checkAuthNum() {-->
+    <!--      $.ajax({-->
+    <!--        url: '/account/checkAuthNum',-->
+    <!--        type: 'POST',-->
+    <!--        success: function (result) {-->
+    <!--          console.log('result', result);-->
+    <!--          alert('인증 체크.');-->
+    <!--        }-->
+    <!--      });-->
+    <!--    }-->
+    <!--  </script>-->
 
     <script th:inline="javascript">
 
@@ -138,76 +138,77 @@
 
       var code = '';
 
-    $(function() {
+      $(function() {
 
-      $(".email_auth_key").click(function(){
-        var authNum = $('#authNum').val();
+        $(".email_auth_key").click(function(){
+          var authNum = $('#authNum').val();
 
-        if(authNum == ''){
-          alert("인증번호를 입력해주세요.");
-          alert(mailcheck)
-          return false;
-        }
-        else if(code == authNum){
-          mailcheck = true;
-          $("#formsummit").attr("disabled",false);
-          // $.ajax({
-          //   type : "GET",
-          //   url : '/account/register',
-          //   data : {
-          //     mailcheck : "true"
-          //   },
-          //   success: function(data){
-          //     alert("인증 확인");
-          //     alert("입력번호 : " + authNum);
-          //     alert("인증번호 : " + code);
-          //     alert("mailcheck : " + mailcheck);
-          //   },
-          // });
-        }
-        else {
+          if(authNum == ''){
+            alert("인증번호를 입력해주세요.");
+            alert(mailcheck)
+            return false;
+          }
+          else if(code == authNum){
+            mailcheck = true;
+            $("#formsummit").attr("disabled",false);
+            // $.ajax({
+            //   type : "GET",
+            //   url : '/account/register',
+            //   data : {
+            //     mailcheck : "true"
+            //   },
+            //   success: function(data){
+            //     alert("인증 확인");
+            //     alert("입력번호 : " + authNum);
+            //     alert("인증번호 : " + code);
+            //     alert("mailcheck : " + mailcheck);
+            //   },
+            // });
+          }
+          else {
             mailcheck = false;
             alert("인증번호가 틀렸습니다.");
             alert("입력번호 : " + authNum);
             alert("인증번호 : " + code);
 
-        }
-        alert("mailcheck : " + mailcheck);
-        // console.log("인증번호 [AuthNum] : " + AuthNum);
-        // console.log("입력값 [authNum] : " + authNum);
-      });
+          }
+          alert("mailcheck : " + mailcheck);
+          // console.log("인증번호 [AuthNum] : " + AuthNum);
+          // console.log("입력값 [authNum] : " + authNum);
+        });
 
-      $(".email_auth_btn").click(function(){
-        var email = $('#email').val();
+        $(".email_auth_btn").click(function(){
+          var email = $('#email').val();
 
-        if(email == ''){
-          alert("이메일을 입력해주세요.");
-          return false;
-        }
-        else {
+          if(email == ''){
+            alert("이메일을 입력해주세요.");
+            return false;
+          }
+          else {
             $.ajax({
-                type : "POST",
-                url : '/account/sendEmail',
-                data : {email : email},
-                async : false,
-                success: function(data){
-                  code = data
-                  $("#authNum").attr("disabled",false);
-                    alert("인증번호가 발송되었습니다.");
-                    alert("mailcheck : " + mailcheck);
+              type : "POST",
+              url : '/account/sendEmail',
+              data : {email : email},
+              async : false,
+              success: function(data){
+                code = data
+                $("#authNum").attr("disabled",false);
+                alert("인증번호가 발송되었습니다.");
+                alert("mailcheck : " + mailcheck);
 
-                  // window.location.reload();
-                },
-                error: function(data){
-                    alert("메일 발송에 실패했습니다.");
-                }
+                // window.location.reload();
+              },
+              error: function(data){
+                alert("메일 발송에 실패했습니다.");
+              }
             });
-        }
+          }
+        });
+
+
       });
-
-
-    });
-  </script>
+    </script>
+  </div>
 </div>
 </body>
 
