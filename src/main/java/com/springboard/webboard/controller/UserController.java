@@ -2,13 +2,10 @@ package com.springboard.webboard.controller;
 
 import com.springboard.webboard.dto.BoardDto;
 import com.springboard.webboard.dto.UserDto;
-import com.springboard.webboard.entity.User;
-import com.springboard.webboard.repository.BoardRepository;
 import com.springboard.webboard.repository.UserRepository;
 import com.springboard.webboard.service.BoardService;
 import com.springboard.webboard.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.buf.UEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,16 +13,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -125,29 +118,37 @@ public class UserController {
     }
 
 
-//    @PostMapping("/mypage/myinfo")
-//    public String myInfo(@Valid UserDto userDto,
-//                         BindingResult bindingResult,
-//                         Model model) {
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("userDto", userDto);
-//            Map<String, String> errorMap = new HashMap<>();
-//
-//            for (FieldError error : bindingResult.getFieldErrors()) {
-//                errorMap.put("valid_" + error.getField(), error.getDefaultMessage());
-//                log.info("error message : " + error.getDefaultMessage());
-//            }
-//            return "/users/mypage";
-//
-//        } else {
-//            model.addAttribute("userDto", userDto);
-//            model.addAttribute("message", "회원정보가 수정되었습니다.");
-//            model.addAttribute("searchUrl", "/");
-//            return "redirect:/";
-//        }
-//
-//    }
-//}
+    @GetMapping("/mypage/password")
+    public String password(Model model,
+                           Authentication authentication){
+        UserDto userDto = userService.findUser(authentication.getName());
+        model.addAttribute("userDto", userDto);
+        return "/user/password";
+    }
+
+    @PutMapping("/mypage/myinfo")
+    public String myInfo(@Valid UserDto userDto,
+                         BindingResult bindingResult,
+                         Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("userDto", userDto);
+            Map<String, String> errorMap = new HashMap<>();
+
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errorMap.put("valid_" + error.getField(), error.getDefaultMessage());
+                log.info("error message : " + error.getDefaultMessage());
+            }
+            return "/users/mypage";
+
+        } else {
+            model.addAttribute("userDto", userDto);
+            model.addAttribute("message", "회원정보가 수정되었습니다.");
+            model.addAttribute("searchUrl", "/");
+            return "redirect:/";
+        }
+
+    }
+}
 
 
 //    @PostMapping("/mypage/my")
@@ -162,6 +163,4 @@ public class UserController {
 //
 //        return "redirect:/mypage/me";
 //    }
-
-
-}
+//}
