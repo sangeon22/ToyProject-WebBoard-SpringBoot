@@ -76,6 +76,9 @@
         <div class="invalid-feedback" th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}">
           생년월일 에러 메세지
         </div>
+        <small id="birthHelp" class="form-text text-muted">
+          생년월일는 ex) 19970318 형식으로 이루어져야합니다.
+        </small>
 
       </div>
 
@@ -90,7 +93,7 @@
         </div>
 
         <small id="emailHelp" class="form-text text-muted">
-          이메일은 OOOO@OOOO.OOO 규칙<br>
+          생년월일는 ex) eonion@naver.com 형식으로 이루어져야합니다.
         </small>
 
         <div class="email_auth">
