@@ -97,6 +97,19 @@ public class UserController {
 
         UserDto userDto = userService.findUser(authentication.getName());
         String role = authentication.getAuthorities().toString();
+
+        switch (role) {
+            case "[ROLE_USER]":
+                role = "일반 회원";
+                break;
+            case "[ROLE_ADMIN, ROLE_USER]":
+                role = "관리자 + 일반 회원";
+                break;
+            case "[ROLE_ADMIN]":
+                role = "관리자";
+                break;
+        }
+
         String password = userRepository.findByUsername(userDto.getUsername()).getPassword();
         log.info("inputPassword = {}", inputPassword);
         log.info("password = {}", password);
