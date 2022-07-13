@@ -13,8 +13,6 @@
 
 .email_auth {width: 100%; margin-top: 10px;}
 .email_auth input {display:inline-block; width: calc(100% - 121px); vertical-align: top; margin: 0;}
-
-
 .email_auth_key{
     display: inline-block;
     width: 115px;
