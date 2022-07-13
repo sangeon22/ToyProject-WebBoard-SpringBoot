@@ -96,11 +96,13 @@ public class UserController {
                         @RequestParam("inputPassword") String inputPassword) {
 
         UserDto userDto = userService.findUser(authentication.getName());
+        String role = authentication.getAuthorities().toString();
         String password = userRepository.findByUsername(userDto.getUsername()).getPassword();
         log.info("inputPassword = {}", inputPassword);
         log.info("password = {}", password);
         if (passwordEncoder.matches(inputPassword, password)) {
             model.addAttribute("userDto", userDto);
+            model.addAttribute("role", role);
             return "user/mypage";
         } else {
             model.addAttribute("message", "비밀번호가 일치하지 않습니다.");

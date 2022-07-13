@@ -42,6 +42,7 @@ public class UserService {
             UserDto userDto = UserDto.builder()
                     .id(userWrapper.getId())
                     .username(userWrapper.getUsername())
+                    .email(userWrapper.getEmail())
                     .birth(userWrapper.getBirth())
                     .build();
 
