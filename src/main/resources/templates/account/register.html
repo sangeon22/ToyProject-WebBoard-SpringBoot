@@ -80,7 +80,7 @@
       </div>
 
       <div class="form-group">
-        <div style="display: flex">
+        <div class="email_auth">
           <input type="email" id="email" class="form-control" placeholder="이메일" th:field="*{email}" th:name="email" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
           <button type="button" class="email_auth_btn" >메일 발송</button>
         </div>
@@ -93,7 +93,7 @@
           이메일은 OOOO@OOOO.OOO 규칙<br>
         </small>
 
-        <div style="display: flex">
+        <div class="email_auth">
           <input type="text" id="authNum" class="form-control" placeholder="인증번호" disabled required>
           <button type="button" class="email_auth_key" >인증번호확인</button>
         </div>
