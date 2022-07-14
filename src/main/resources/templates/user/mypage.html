@@ -27,24 +27,25 @@
             <form th:object="${userDto}">
                 <div class="form-group">
                     <label th:for="email">이메일</label>
-                    <input type="email" th:field="*{email}" class="form-control" disabled>
+                    <input type="email" th:field="*{email}" class="form-control" style="text-align: center" disabled>
                 </div>
 
                 <div class="form-group">
                     <label th:for="role">회원 권한</label>
-                    <input type="text" th:value="${role}" class="form-control" disabled>
+                    <input type="text" th:value="${role}" class="form-control" style="text-align: center" disabled>
                 </div>
 
                 <div class="form-group">
                     <label th:for="username">회원 닉네임</label>
-                    <input type="text" th:field="*{username}" class="form-control" disabled>
+                    <input type="text" th:field="*{username}" class="form-control" style="text-align: center" disabled>
                 </div>
 
                 <div class="form-group">
                     <label th:for="birth">생년월일</label>
-                    <input type="text" th:field="*{birth}" class="form-control" disabled>
+                    <input type="text" th:field="*{birth}" class="form-control" style="text-align: center" disabled>
                 </div>
 
+                <br>
                 <a class="btn btn-secondary btn-lg btn-block" th:href="@{/users/myboardlist}">나의 작성 게시글</a>
                 <a class="btn btn-primary btn-lg btn-block" th:href="@{/users/mypage/password}">비밀번호 변경</a>
                 <button type="button" class="btn btn-danger btn-lg btn-block" th:onclick="|deleteUser(*{id})|">회원탈퇴</button>
