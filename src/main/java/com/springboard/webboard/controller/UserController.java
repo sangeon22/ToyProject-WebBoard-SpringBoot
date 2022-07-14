@@ -1,7 +1,9 @@
 package com.springboard.webboard.controller;
 
 import com.springboard.webboard.dto.BoardDto;
+import com.springboard.webboard.dto.PasswordForm;
 import com.springboard.webboard.dto.UserDto;
+import com.springboard.webboard.entity.User;
 import com.springboard.webboard.repository.UserRepository;
 import com.springboard.webboard.service.BoardService;
 import com.springboard.webboard.service.UserService;
@@ -13,17 +15,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Controller
@@ -120,35 +122,98 @@ public class UserController {
 
     @GetMapping("/mypage/password")
     public String password(Model model,
-                           Authentication authentication){
-        UserDto userDto = userService.findUser(authentication.getName());
-        model.addAttribute("userDto", userDto);
+                           Authentication authentication,
+                           PasswordForm passwordForm) {
+//        UserDto userDto = userService.findUser(authentication.getName());
+//        model.addAttribute("userDto", userDto);
+        model.addAttribute("passwordForm", passwordForm);
         return "/user/password";
     }
 
-    @PutMapping("/mypage/myinfo")
-    public String myInfo(@Valid UserDto userDto,
-                         BindingResult bindingResult,
-                         Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("userDto", userDto);
-            Map<String, String> errorMap = new HashMap<>();
+    @PostMapping("/mypage/password")
+    public String password(@Valid PasswordForm passwordForm,
+                           BindingResult bindingResult,
+                           Model model,
+                           Authentication authentication) {
+//                           ,@AuthenticationPrincipal User currentUser) {
 
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errorMap.put("valid_" + error.getField(), error.getDefaultMessage());
-                log.info("error message : " + error.getDefaultMessage());
-            }
-            return "/users/mypage";
 
-        } else {
-            model.addAttribute("userDto", userDto);
-            model.addAttribute("message", "회원정보가 수정되었습니다.");
+//        log.info("=========================");
+//        log.info("=========================");
+//        log.info("=========================");
+//        log.info("user : " + currentUser);
+//        log.info("getPassword : " + currentUser.getPassword());
+//        log.info("=========================");
+//        log.info("=========================");
+
+//        if (bindingResult.hasErrors()) {
+//            return "redirect:/users/mypage/password";
+//        }
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        UserDto userDto = userService.findUser(authentication.getName());
+        String CurrentPassword = userDto.getPassword();
+        String CurrentCheckPassword = passwordForm.getPassword();
+        String NewPassword = passwordForm.getNewPassword();
+        String RePassword = passwordForm.getRePassword();
+
+        String code = userService.passwordCheck(model, CurrentPassword, CurrentCheckPassword, NewPassword, RePassword);
+
+        if (code.equals("ok")) {
+            String encodedNewPassword = encoder.encode(NewPassword);
+            userService.updatePassword(authentication.getName(), encodedNewPassword);
+            model.addAttribute("message", "비밀번호가 변경되었습니다.");
             model.addAttribute("searchUrl", "/");
-            return "redirect:/";
+            return "board/message";
+
+        }
+        if (code.equals("현재 패스워드 불일치")) {
+            model.addAttribute("message", "현재 비밀번호가 올바르지 않습니다.");
+            model.addAttribute("searchUrl", "/users/mypage/password");
+            return "board/message";
         }
 
+        if (code.equals("동일한 패스워드")) {
+
+            model.addAttribute("message", "새 비밀번호는 현재 비밀번호와 일치할 수 없습니다.");
+            model.addAttribute("searchUrl", "/users/mypage/password");
+            return "board/message";
+        }
+
+        if (code.equals("새 패스워드 불일치")) {
+
+            model.addAttribute("message", "새 비밀번호 확인이 일치하지 않습니다.");
+            model.addAttribute("searchUrl", "/users/mypage/password");
+            return "board/message";
+        }
+
+        return "null";
     }
+
+
 }
+
+
+//        currentUser.setPassword(encodedNewPassword);
+
+
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("userDto", userDto);
+//            Map<String, String> errorMap = new HashMap<>();
+//
+//            for (FieldError error : bindingResult.getFieldErrors()) {
+//                errorMap.put("valid_" + error.getField(), error.getDefaultMessage());
+//                log.info("error message : " + error.getDefaultMessage());
+//            }
+//            return "redirect:/mypage/password";
+//
+//        } else {
+//            model.addAttribute("userDto", userDto);
+//            model.addAttribute("message", "회원정보가 수정되었습니다.");
+//            model.addAttribute("searchUrl", "/");
+//            return "redirect:/";
+//        }
+
 
 
 //    @PostMapping("/mypage/my")

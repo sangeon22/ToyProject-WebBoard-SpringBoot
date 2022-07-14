@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +44,7 @@ public class UserService {
             UserDto userDto = UserDto.builder()
                     .id(userWrapper.getId())
                     .username(userWrapper.getUsername())
+                    .password(userWrapper.getPassword())
                     .email(userWrapper.getEmail())
                     .birth(userWrapper.getBirth())
                     .build();
@@ -106,8 +109,33 @@ public class UserService {
         javaMailSender.send(simpleMailMessage);
     }
 
+    public void updatePassword(String username, String encodedNewPassword) {
+        User user = userRepository.findByUsername(username);
+        user.setPassword(encodedNewPassword);
+        userRepository.save(user);
+    }
+
+    public String passwordCheck(Model model, String CurrentPassword, String CurrentCheckPassword, String NewPassword, String RePassword){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        if (!encoder.matches(CurrentCheckPassword, CurrentPassword)) {
+            model.addAttribute("error", "현재 패스워드 불일치");
+            return "현재 패스워드 불일치";
+        }
+
+        if (NewPassword.equals(CurrentCheckPassword)) {
+            model.addAttribute("error", "동일한 패스워드");
+            return "동일한 패스워드";
+        }
 
 
+        if (!NewPassword.equals(RePassword)) {
+            model.addAttribute("error", "새 패스워드 불일치");
+            return "새 패스워드 불일치";
+        }
+
+        return "ok";
+    }
 
 //    @Transactional
 //    public Long updateInfo(String username, String newName, String birth){
