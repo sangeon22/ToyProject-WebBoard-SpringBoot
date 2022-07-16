@@ -93,7 +93,7 @@ public class AccountController {
             userService.save(userDto);
             model.addAttribute("message", "회원가입이 완료되었습니다.");
             model.addAttribute("searchUrl", "/");
-            return "board/message";
+            return "message/message";
 //            } else {
 //                return "/account/register";
 //            }
