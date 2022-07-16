@@ -22,10 +22,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -115,26 +118,21 @@ public class UserController {
         } else {
             model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
             model.addAttribute("searchUrl", "/users/mypage");
-            return "board/message";
+            return "message/message";
         }
     }
 
 
     @GetMapping("/mypage/password")
-    public String password(Model model,
-                           Authentication authentication,
-                           PasswordForm passwordForm) {
-//        UserDto userDto = userService.findUser(authentication.getName());
-//        model.addAttribute("userDto", userDto);
-        model.addAttribute("passwordForm", passwordForm);
+    public String password(PasswordForm passwordForm) {
         return "/user/password";
     }
 
     @PostMapping("/mypage/password")
     public String password(@Valid PasswordForm passwordForm,
                            BindingResult bindingResult,
-                           Model model,
-                           Authentication authentication) {
+                           Authentication authentication,
+                           Model model) {
 //                           ,@AuthenticationPrincipal User currentUser) {
 
 
@@ -145,10 +143,16 @@ public class UserController {
 //        log.info("getPassword : " + currentUser.getPassword());
 //        log.info("=========================");
 //        log.info("=========================");
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("passwordForm", passwordForm);
 
-//        if (bindingResult.hasErrors()) {
-//            return "redirect:/users/mypage/password";
-//        }
+            Map<String, String> errorMap = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errorMap.put("valid_" + error.getField(), error.getDefaultMessage());
+                log.info("error message : " + error.getDefaultMessage());
+            }
+            return "/user/password";
+        }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         UserDto userDto = userService.findUser(authentication.getName());
@@ -164,27 +168,28 @@ public class UserController {
             userService.updatePassword(authentication.getName(), encodedNewPassword);
             model.addAttribute("message", "비밀번호가 변경되었습니다.");
             model.addAttribute("searchUrl", "/");
-            return "board/message";
+            return "message/message";
 
         }
         if (code.equals("현재 패스워드 불일치")) {
+            model.addAttribute("passwordForm", passwordForm);
             model.addAttribute("message", "현재 비밀번호가 올바르지 않습니다.");
             model.addAttribute("searchUrl", "/users/mypage/password");
-            return "board/message";
+            return "message/message";
         }
 
         if (code.equals("동일한 패스워드")) {
-
+            model.addAttribute("passwordForm", passwordForm);
             model.addAttribute("message", "새 비밀번호는 현재 비밀번호와 일치할 수 없습니다.");
             model.addAttribute("searchUrl", "/users/mypage/password");
-            return "board/message";
+            return "message/message";
         }
 
         if (code.equals("새 패스워드 불일치")) {
-
+            model.addAttribute("passwordForm", passwordForm);
             model.addAttribute("message", "새 비밀번호 확인이 일치하지 않습니다.");
             model.addAttribute("searchUrl", "/users/mypage/password");
-            return "board/message";
+            return "message/message";
         }
 
         return "null";
@@ -213,7 +218,6 @@ public class UserController {
 //            model.addAttribute("searchUrl", "/");
 //            return "redirect:/";
 //        }
-
 
 
 //    @PostMapping("/mypage/my")
