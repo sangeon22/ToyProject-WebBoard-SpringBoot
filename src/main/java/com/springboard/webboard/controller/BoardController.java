@@ -108,7 +108,7 @@ public class BoardController {
             boardService.save(boardDto, username, file, view);
             model.addAttribute("message", "글 작성이 완료되었습니다.");
             model.addAttribute("searchUrl", "/board/list");
-            return "board/message";
+            return "message/message";
         }
 
     }
@@ -140,11 +140,11 @@ public class BoardController {
             boardService.save(boardDto, username, file, view);
             model.addAttribute("message", "글 수정이 완료되었습니다.");
             model.addAttribute("searchUrl", "/board/list");
-            return "board/message";
+            return "message/message";
         } else {
             model.addAttribute("message", "해당 게시글 수정 권한이 없습니다.");
             model.addAttribute("searchUrl", "/board/list");
-            return "board/message";
+            return "message/message";
         }
     }
 
