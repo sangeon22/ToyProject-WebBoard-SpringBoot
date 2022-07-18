@@ -15,9 +15,10 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('mypage')">
-    </nav>
-    <div class="col-lg-4" style="margin: auto">
+
+    <header th:replace="fragments/common :: menu('mypage')"></header>
+
+    <div class="col-lg-4" style="margin: auto; padding : 50px 0;">
         <div class="useredit">
             <div class="fa-user" th:align="center">
                 <h2>나의 회원 정보</h2>

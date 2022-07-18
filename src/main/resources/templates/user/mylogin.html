@@ -16,6 +16,8 @@
 
 <body class="text-center">
 <form class="form-signin" th:action="@{/users/mypage}" method="post">
+    <a th:href="@{/}"><img class="mb-4" src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg" alt=""
+                           width="72" height="72"></a>
     <h1 class="h3 mb-3 font-weight-normal">마이페이지 로그인</h1>
     <div th:if="${param.error}" class="alert alert-danger" role="alert">
         Invalid username and password.
@@ -33,7 +35,7 @@
     <button class="btn btn-lg btn-secondary btn-block" type="button" onClick="history.go(-1)" >뒤로 가기</button>
 
 
-    <p class="mt-5 mb-3 text-muted">&copy; Eonion</p>
+    <p class="mt-5 mb-3 text-muted">&copy; 2020 Eonion Web</p>
 </form>
 
 

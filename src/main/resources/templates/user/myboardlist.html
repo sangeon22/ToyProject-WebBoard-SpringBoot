@@ -15,33 +15,33 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('mypage')">
-</nav>
-    <div class="container">
+<header th:replace="fragments/common :: menu('mypage')"></header>
+
+<div class="container" style="margin: auto; padding : 70px 0;">
         <h2>내 게시글 목록</h2>
         <div>총 게시글 수 : <span th:text="${boards.totalElements}"></span></div>
         <form class="form-inline d-flex justify-content-end" method="GET" th:action="@{/users/myboardlist}">
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                    <tr class="text-center">
-                        <th scope="col">글번호</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">작성자</th>
-                        <th scope="col">조회수</th>
-                        <th scope="col">작성 시간</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="board : ${boards}" class="text-center">
-                        <td th:text="${board.id}">id</td>
-                        <td><a th:text="${board.title}" th:href="@{/board/boardview(id=${board.id})}">제목</a>
-                        </td>
-                        <td th:text="${board.user.username}">작성자</td>
-                        <td th:text="${board.view}">조회수</td>
-                        <td th:text="${#temporals.format(board.modifiedDate, 'yyyy-MM-dd HH:mm')}">작성시간</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                <tr class="text-center">
+                    <th scope="col">글번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">조회수</th>
+                    <th scope="col">작성 시간</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="board : ${boards}" class="text-center">
+                    <td th:text="${board.id}">id</td>
+                    <td><a th:text="${board.title}" th:href="@{/board/boardview(id=${board.id})}">제목</a>
+                    </td>
+                    <td th:text="${board.user.username}">작성자</td>
+                    <td th:text="${board.view}">조회수</td>
+                    <td th:text="${#temporals.format(board.modifiedDate, 'yyyy-MM-dd HH:mm')}">작성시간</td>
+                </tr>
+                </tbody>
+            </table>
 
         </form>
         <br/>
@@ -68,6 +68,8 @@
         </nav>
         <a class="btn btn-lg btn-secondary btn-block" type="button" th:href="@{/users/mypage}" >뒤로 가기</a>
     </div>
+
+
 
 
 
