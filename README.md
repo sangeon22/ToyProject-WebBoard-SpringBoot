@@ -32,94 +32,91 @@ Springboot + security,JPA + HeidiSQL(MariaDB,MySQL) + BootStrap 웹게시판
  ┣ 📂main
  ┃ ┣ 📂java
  ┃ ┃ ┗ 📂com
- ┃ ┃ ┃ ┗ 📂coco
- ┃ ┃ ┃ ┃ ┗ 📂board
- ┃ ┃ ┃ ┃ ┃ ┣ 📂application
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dto
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostsDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂security
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂auth
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomAuthFailureHandler.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomUserDetails.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomUserDetailsService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LoginUser.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜LoginUserArgumentResolver.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂oauth
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomOAuth2UserService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜OAuthAttributes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂validator
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AbstractValidator.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜CustomValidators.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostsService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserService.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂domain
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BaseTimeEntity.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Comment.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Posts.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Role.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜User.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂infrastructure
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂config
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SecurityConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜WebConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂persistence
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostsRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserRepository.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂presentation
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentApiController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostsApiController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostsIndexController.java
+ ┃ ┃ ┃ ┗ 📂springboard
+ ┃ ┃ ┃ ┃ ┗ 📂webboard
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂adapter
+ ┃ ┃ ┃ ┃ ┃ ┃  ┗ 📜UserAdapter.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂config
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomUserDetails.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MethodSecurityConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SessionUser.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜WebSecurityConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AccountController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BoardApiController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BoardController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜HomeController.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜UserApiController.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserController.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜BoardApplication.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BoardDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BoardViewDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PasswordForm.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDto.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Board.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Role.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜TimeEntity.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜User.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BoardRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomizedUserRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomizedUserRepositoryImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂serivce
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BoardService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ConsoleMailSender.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomUserDetailsService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserService.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂validator
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BoardValidator.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserValidator.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜WebboardApplication.java
  ┃ ┗ 📂resources
  ┃ ┃ ┣ 📂static
  ┃ ┃ ┃ ┣ 📂css
- ┃ ┃ ┃ ┃ ┗ 📜app.css
- ┃ ┃ ┃ ┣ 📂img
- ┃ ┃ ┃ ┃ ┗ 📜naver.ico
- ┃ ┃ ┃ ┗ 📂js
- ┃ ┃ ┃ ┃ ┗ 📜app.js
+ ┃ ┃ ┃ ┃ ┣ 📜join.css
+ ┃ ┃ ┃ ┃ ┣ 📜signin.css
+ ┃ ┃ ┃ ┃ ┗ 📜stater-template.css
+ ┃ ┃ ┃ ┣ 📂files
  ┃ ┃ ┣ 📂templates
- ┃ ┃ ┃ ┣ 📂comment
- ┃ ┃ ┃ ┃ ┣ 📜form.mustache
- ┃ ┃ ┃ ┃ ┗ 📜list.mustache
- ┃ ┃ ┃ ┣ 📂layout
- ┃ ┃ ┃ ┃ ┣ 📜footer.mustache
- ┃ ┃ ┃ ┃ ┗ 📜header.mustache
- ┃ ┃ ┃ ┣ 📂posts
- ┃ ┃ ┃ ┃ ┣ 📜posts-page.mustache
- ┃ ┃ ┃ ┃ ┣ 📜posts-read.mustache
- ┃ ┃ ┃ ┃ ┣ 📜posts-search.mustache
- ┃ ┃ ┃ ┃ ┣ 📜posts-update.mustache
- ┃ ┃ ┃ ┃ ┗ 📜posts-write.mustache
+ ┃ ┃ ┃ ┣ 📂account
+ ┃ ┃ ┃ ┃ ┣ 📜checked-email.html
+ ┃ ┃ ┃ ┃ ┣ 📜login.html
+ ┃ ┃ ┃ ┃ ┗ 📜register.html
+ ┃ ┃ ┃ ┣ 📂board
+ ┃ ┃ ┃ ┃ ┣ 📜boardview.html
+ ┃ ┃ ┃ ┃ ┣ 📜form.html
+ ┃ ┃ ┃ ┃ ┣ 📜list.html
+ ┃ ┃ ┃ ┃ ┗ 📜modify.html
+ ┃ ┃ ┃ ┣ 📂fragment
+ ┃ ┃ ┃ ┃ ┗ 📜common.html
+ ┃ ┃ ┃ ┣ 📂message
+ ┃ ┃ ┃ ┃ ┗ 📜message.html
  ┃ ┃ ┃ ┣ 📂user
- ┃ ┃ ┃ ┃ ┣ 📜user-join.mustache
- ┃ ┃ ┃ ┃ ┣ 📜user-login.mustache
- ┃ ┃ ┃ ┃ ┗ 📜user-modify.mustache
- ┃ ┃ ┃ ┗ 📜index.mustache
- ┃ ┃ ┣ 📜application-oauth.properties
+ ┃ ┃ ┃ ┃ ┣ 📜myboardlist.html
+ ┃ ┃ ┃ ┃ ┣ 📜mylogin.html
+ ┃ ┃ ┃ ┃ ┣ 📜mypage.html
+ ┃ ┃ ┃ ┃ ┣ 📜password.html
+ ┃ ┃ ┃ ┃ ┗ 📜userlist.html
+ ┃ ┃ ┃ ┗ 📜index.html
  ┃ ┃ ┗ 📜application.properties
  ┗ 📂test
  ┃ ┗ 📂java
  ┃ ┃ ┗ 📂com
- ┃ ┃ ┃ ┗ 📂coco
- ┃ ┃ ┃ ┃ ┗ 📂board
+ ┃ ┃ ┃ ┗ 📂springboard
+ ┃ ┃ ┃ ┃ ┗ 📂webboard
  ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜PostsApiControllerTest.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂domain
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentRepositoryTest.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostsRepositoryTest.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserRepositoryTest.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂infrastructure
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜AccountControllerTest.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜UserServiceTest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜UserServiceTest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserServiceTest.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂dd
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂config
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SecurityConfigTest.java
  ┃ ┃ ┃ ┃ ┃ ┣ 📂service
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜PostsServiceTest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜dd.java
  ┃ ┃ ┃ ┃ ┃ ┗ 📜BoardApplicationTests.java
  ```
   
