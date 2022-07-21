@@ -2,6 +2,9 @@
 Springboot + security,JPA + HeidiSQL(MariaDB,MySQL) + BootStrap 웹게시판 
 
 
+![메인화면](https://user-images.githubusercontent.com/86394597/180235451-f6fdabd3-3e91-409c-bad3-2c666613e588.JPG)
+
+
 ![메인_화면_API_(HomeController)](https://user-images.githubusercontent.com/86394597/179543694-c9df5462-9472-43ab-8704-eaddade81205.JPG)
 
 
@@ -18,6 +21,7 @@ Springboot + security,JPA + HeidiSQL(MariaDB,MySQL) + BootStrap 웹게시판
 
 
 ![게시판_관련_API_(BoardApiController)](https://user-images.githubusercontent.com/86394597/179543711-26b04c7e-7655-464b-9749-16b41df65aec.JPG)
+
 
 
 
