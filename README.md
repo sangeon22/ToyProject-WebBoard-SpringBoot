@@ -426,9 +426,9 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 
 <details>
 <summary>비밀번호 변경 - 현재 로그인 계정 비밀번호 불일치 에러 GIF 보기</summary>
-- 현재 로그인한 사용자의 비밀번호가 불일치 시 에러 알림 
+
 ![16](https://user-images.githubusercontent.com/86394597/180460173-be8034ac-368e-4378-85ec-1cce9b1b6a31.gif)
- 
+- 현재 로그인한 사용자의 비밀번호가 불일치 시 에러 알림 
 </details>
   
 <br>
@@ -444,9 +444,9 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 
 <details>
 <summary>비밀번호 변경 - 새 비밀번호 재확인 불일치 GIF 보기</summary>
-- 새 비밀번호와 새 비밀번호 재확인이 불일치 시 에러 알림
+
 ![18](https://user-images.githubusercontent.com/86394597/180460176-57564c98-4a94-4013-ae2f-475af3e9b6ed.gif)
- 
+- 새 비밀번호와 새 비밀번호 재확인이 불일치 시 에러 알림
 </details>
   
 <br>
