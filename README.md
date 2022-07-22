@@ -3,7 +3,7 @@ Springboot + security,JPA + HeidiSQL(MariaDB,MySQL) + BootStrap 웹게시판
 
 <img src="https://user-images.githubusercontent.com/86394597/180389566-60dddd57-7c70-4d13-8027-9b4d729bfd88.JPG">
 
-## 프로젝트 소개
+## ⅰ. 프로젝트 소개 (요구사항)
 ### 1. 프로젝트 소개
 CRUD API 설계는 기본적으로 웹 게시판이 가장 적절하다고 생각하여 웹 게시판 프로젝트를 만들게 되었습니다. 또한 spring을 활용하여 스프링에 대한 이해를 높이고자 시작하게 되었습니다.
 Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, Thymeleaf 및 Script, html, css 등은 필요한 부분을 공부하며 추가하였고, Backend의 기능들을 추가하다보니 더욱 흥미를 느껴 관련 문서, 구글링을 통해 원하는 기능을 구현해나갔습니다. OAuth2를 활용한 SNS로그인과 댓글 기능은 아직 진행 중에 있습니다.
@@ -70,7 +70,7 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
  
 <br>
 
-## 구조 및 설계
+## ⅱ. 구조 및 설계 (설계)
 ### 1. 패키지 구조
 <details>
 <summary>패키지 구조 보기</summary>   
@@ -168,7 +168,7 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜dd.java
  ┃ ┃ ┃ ┃ ┃ ┗ 📜BoardApplicationTests.java
  ```
-  
+
  </details>   
 <br>
 
@@ -215,11 +215,44 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 
 <br>
 
-## 실행 화면
-<details>
-<summary>게시글 관련 보기</summary>
+## ⅲ. 실행 화면 (구현)
+<summary> 메인화면</summary>
 
 ![1](https://user-images.githubusercontent.com/86394597/180411549-042e6585-917c-4919-aa68-f01b6a7a42cd.JPG)
+
+![녹화_2022_07_22_22_21_03_170](https://user-images.githubusercontent.com/86394597/180447971-c04a0f1f-41c0-49ec-bd9d-2836827a0f15.gif)
+
+
+
+<details>
+<summary> 관련 보기</summary>
+</details>
+
+<details>
+<summary> 관련 보기</summary>
+</details>
+
+
+<details>
+<summary> 관련 보기</summary>
+</details>
+
+
+<details>
+<summary> 관련 보기</summary>
+</details>
+
+
+<details>
+<summary> 관련 보기</summary>
+</details>
+
+
+<details>
+<summary> 관련 보기</summary>
+</details>
+
+
 ![2](https://user-images.githubusercontent.com/86394597/180411554-e0750447-42c2-406c-a2a3-aa177a6206af.JPG)
 ![3](https://user-images.githubusercontent.com/86394597/180411556-192f0f75-364d-4f72-9ac1-1b69b6bbe0fd.JPG)
 ![4-1](https://user-images.githubusercontent.com/86394597/180411559-9403cdbe-4f7c-4bb6-b260-9cc25a968f90.JPG)
@@ -233,7 +266,6 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 ![10](https://user-images.githubusercontent.com/86394597/180411599-7ded26b1-0ca6-4ed7-b229-5ab1cc37e814.JPG)
 ![11](https://user-images.githubusercontent.com/86394597/180411696-bb21f001-ff6b-426a-ac25-21e3fbf22d97.JPG)
 ![12](https://user-images.githubusercontent.com/86394597/180411704-e9d5232e-5bb4-4ca4-9f68-1b772df3795f.JPG)
-![12-1](https://user-images.githubusercontent.com/86394597/180411690-2c55c1d9-db2a-4646-afa2-93e1163af45b.JPG)
 ![13](https://user-images.githubusercontent.com/86394597/180411757-ada1856a-5f81-4cb3-93d9-452ac250ed68.JPG)
 ![14](https://user-images.githubusercontent.com/86394597/180411759-c949c20d-d41e-4f24-9389-cd4d5da6048e.JPG)
 ![15](https://user-images.githubusercontent.com/86394597/180411762-54bfb1f1-bbed-474d-95c2-6e3892e80653.JPG)
@@ -271,8 +303,16 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
  
 </details>
 
+<br>
 
-## 후기
+## ⅳ. 테스트 (테스트)
+- 정리 후 업데이트 예정
+
+
+<br>
+
+## ⅴ. 후기
+
 ### 1. 프로젝트 보완사항
 ### 2. 느낀 점 
 
