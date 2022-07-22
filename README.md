@@ -1,7 +1,7 @@
 # ToyProject-WebBoard-SpringBoot
 Springboot + security,JPA + HeidiSQL(MariaDB,MySQL) + BootStrap 웹게시판
 
-<img src="https://user-images.githubusercontent.com/86394597/180383897-cf065e8b-3d55-49ab-934b-d7106432918a.JPG" width="70%" height=500><img src="https://user-images.githubusercontent.com/86394597/180387985-1b6f0cc8-19e7-4982-9184-6813f04fa89b.JPG" width="30%" height="500">
+<img src="https://user-images.githubusercontent.com/86394597/180389566-60dddd57-7c70-4d13-8027-9b4d729bfd88.JPG">
 
 ## 프로젝트 소개
 ### 1. 프로젝트 소개
