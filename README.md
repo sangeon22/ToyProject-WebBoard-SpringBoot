@@ -11,9 +11,7 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 <br>
 
 ### 2. 프로젝트 기능
-<details>
-<summary>프로젝트 기능 보기</summary>   
- 
+
 [게시판]
 - CRUD 기능 (하단의 API 설계 참조)
 - 조회수
@@ -40,13 +38,9 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 - 회원탈퇴
 - OAuth 2.0 구글, 네이버 로그인 (개발중)
 
-</details>
-
 <br>
 
 ### 3. 개발 환경
-<details>
-<summary>개발환경 보기</summary>   
  
 [Backend]
 - IDE(통합개발환경) : IntelliJ Ultimate Edition
@@ -66,7 +60,6 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 - Bootstrap
 - Html/Css
 - JavaScript
-</details>
  
 <br>
 
@@ -173,8 +166,6 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 <br>
 
 ### 2. API 설계
-<details>
-<summary>API 설계 보기</summary>
 
 ![메인_화면_API_(HomeController)](https://user-images.githubusercontent.com/86394597/179543694-c9df5462-9472-43ab-8704-eaddade81205.JPG)
 
@@ -193,12 +184,9 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 
 ![게시판_관련_API_(BoardApiController)](https://user-images.githubusercontent.com/86394597/179543711-26b04c7e-7655-464b-9749-16b41df65aec.JPG)
 
-</details>
 <br>
 
 ### 3. DB 설계
-<details>
-<summary>DB 설계 보기</summary>
 
 ![스프링 웹프로젝트 DB ERD](https://user-images.githubusercontent.com/86394597/180385082-70d1b417-332c-41f3-bfce-143752372d9d.JPG)
 
@@ -211,7 +199,6 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 ![User_Role](https://user-images.githubusercontent.com/86394597/180385071-a6916e27-1a07-45fa-9e45-e68aa728b76d.JPG)
 
 ![Reply](https://user-images.githubusercontent.com/86394597/180385065-da5a28b0-725b-443a-86de-6db83e0a31ef.JPG)
-</details>
 
 <br>
 
@@ -226,51 +213,116 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 <summary>로그인 로그아웃 GIF 보기</summary>
  
 ![1 로그인, 로그아웃](https://user-images.githubusercontent.com/86394597/180460125-dcff68fe-7418-4d53-adc6-cfa824763396.gif)
+- SpringSecurity 로그인, 로그아웃
+- OAuth2 SNS Naver, Kakao 로그인 (개발중)
 
+ <br>
+
+ ![관리자](https://user-images.githubusercontent.com/86394597/180470092-241aa1e7-d540-403d-8fa0-7733e028d8e0.JPG)
+
+ ![유저](https://user-images.githubusercontent.com/86394597/180470111-b424aeaf-f7a8-478a-9c0d-4312eb08028e.jpg)
+
+- ROLE_ADMIN, ROLE_USER 권한 차이 설정 (API제한, UI)
+- Header 부분에 권한 표시
+- 관리자의 경우, Header 상단 메뉴에 회원목록
 </details>
+
+<br>
 
 <details>
 <summary>회원가입 + 메일 인증 GIF 보기</summary>
  
 ![2](https://user-images.githubusercontent.com/86394597/180460135-eeb480b2-3889-4545-953c-4aaadc3d3e2f.gif)
- 
+- @Valid를 이용한 Form 검증
+- 입력 규칙이 틀리면, Error를 화면에 표시 
+- JavaMailSender를 이용한 이메일 인증
+- 사용자가 입력한 이메일로 5자리 인증코드 전송
+- 메일 정상발송 시, 알림창 표시 후 인증번호 입력칸 활성화
+- 인증코드 일치 시, 알림창 표시 후 입력한 이메일 수정 불가능 하도록 비활성화
+- 인증코드 일치 시, 가입하기 버튼 활성화
+- 회원가입 성공 시, 알림창 
 </details>
+
+<br>
 
 <details>
 <summary>회원가입 @Valid 검사 GIF 보기</summary>
- 
+
 ![3](https://user-images.githubusercontent.com/86394597/180460139-4d0770ed-115c-41c9-8d1d-809f5687002d.gif)
- 
+- @Valid를 이용한 Form 검증
+- 입력 규칙이 틀리면, Error를 화면에 표시  
 </details>
+
+<br>
 
 <details>
 <summary>게시판 리스트 페이징 및 검색 GIF 보기</summary>
  
 ![4  게시판리스트 화면](https://user-images.githubusercontent.com/86394597/180460144-f75fde25-302b-47a4-b5bf-b4adfc982033.gif)
- 
+- 제목이나 내용을 포함하는 키워드로 게시물 검색 기능
+- 게시글 조회수 기능
+- 게시판 리스트 작성시간 수정시간 기능 추가 JpaAuditing
+- DB에 등록된 게시글을 최근 작성시간/수정시간 기준 정렬
+- 아래 페이징처리된 버튼을 통해 분할처리된 페이지들에 등록된 게시글을 확인 가능, 현재 페이지는 회색 표기(게시글 리스트 페이징처리 기능)
+- 게시글 리스트 페이지 Paging 처리
+- Paging 블록 처리 5단위로 넘어가도록 처리
 </details>
  
+<br>
+
 <details>
 <summary>게시글 조회수 증가 GIF 보기</summary>
  
 ![5,6  게시글 조회수 증가](https://user-images.githubusercontent.com/86394597/180460148-2288f103-2261-43f3-b125-7d0ca5b1dd61.gif)
- 
+- 게시글 클릭 시, 조회수 증가
 </details>
+
+<br>
 
 <details>
 <summary>게시글 상세 페이지 GIF 보기</summary>
  
 ![5,6  게시글상세](https://user-images.githubusercontent.com/86394597/180460149-52736384-04e2-4ade-b352-522b2865ec5e.gif)
+- 수정폼, 상세글, 작성폼 모듈 분리 및 JpaAuditing(작성,수정시간)
+- FileUpload 기능
+- 조회수 기능
+- 업로드된 파일 상세페이지에 출력
+- 업로드한 이미지 출력 및 다운
+- 댓글 기능 (개발중)
  
+<br>
+ 
+- 파일다운 버튼 클릭 시, 이미지를 저장 가능한 페이지로 이동
+- 뒤로가기 버튼 클릭 시, 게시글 리스트 페이지로 이동
+ 
+<br>
+ 
+- 수정 버튼 클릭 시, 수정권한체크(작성자 본인 OR 관리자 권한)
+- 수정 성공 시, 완료 알림창을 띄운 후 게시글 리스트 페이지로 이동
+- 수정 실패 시, 권한 에러 알림창을 띄운 후 해당 게시글로 리다이렉트
+ 
+<br>
+ 
+- 삭제 버튼 클릭 시, 삭제권한체크(작성자 본인 OR 관리자 권한)
+- 삭제 성공 시, 완료 알림창을 띄운 후 게시글 리스트 페이지로 이동
+- 삭제 실패 시, 권한 에러 알림창을 띄운 후 해당 게시글로 리다이렉트
 </details>
  
+<br>
+
 <details>
 <summary>게시글 작성 @Valid 및 파일 업로드 GIF 보기</summary>
  
 ![7 작성](https://user-images.githubusercontent.com/86394597/180460152-f335cfa4-3002-48f8-a8c6-df0da2bbb848.gif)
- 
+- Validator를 이용한 Form 검증
+- 입력 규칙이 틀리면, Error를 화면에 표시 
+- 파일 선택 버튼 클릭 시, 파일 업로드 가능 (파일 업로드 기능)
+- 확인 버튼 클릭 시, 등록완료 알림창을 띄운 후 게시글 리스트 페이지로 이동
+- 취소 버튼 클릭 시, 게시글 리스트로 이동
 </details>
  
+<br>
+
 <details>
 <summary>게시글 작성 결과 GIF 보기</summary>
  
@@ -278,13 +330,22 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
  
 </details>
 
+<br>
+
 <details>
 <summary>게시글 수정 @Valid 검사 및 성공 GIF 보기</summary>
  
 ![8](https://user-images.githubusercontent.com/86394597/180460155-30ec2444-f4d1-4571-be88-edd25ef431f3.gif)
-
+- Validator를 이용한 Form 검증
+- 입력 규칙이 틀리면, Error를 화면에 표시 
+- 수정 버튼을 클릭하여 수정폼에 들어오면, 원문 게시글의 내용을 미리 수정폼에 위치시켜둔다.
+- 파일 업로드 기능
+- 확인 버튼 클릭 시, 수정완료 알림창을 띄운 후 게시글 리스트 페이지로 이동 (게시글 수정메세지 기능)
+- 취소 버튼 클릭 시, 이전 게시글로 재이동
 </details>
  
+<br>
+
 <details>
 <summary>게시글 수정 실패 (관리자 권한 OR 작성자 본인이 아니면 수정 불가) GIF 보기</summary>
  
@@ -292,97 +353,121 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
  
 </details>
  
+<br>
+
 <details>
 <summary>게시글 삭제 성공 GIF 보기</summary>
  
 ![10](https://user-images.githubusercontent.com/86394597/180460158-37ce9a6a-6a18-4d99-ba14-d8febd3a01d2.gif)
- 
+- 삭제 버튼 클릭 시, 삭제완료 알림창을 띄운 후 게시글 리스트 페이지로 이동 
 </details>
  
+<br>
+
 <details>
 <summary>게시글 삭제 실패 (관리자 권한 OR 작성자 본인이 아니면 삭제 불가) GIF 보기</summary>
  
 ![11](https://user-images.githubusercontent.com/86394597/180460160-40d5e5dd-1181-42d9-8cf5-3b48a8c5d0eb.gif)
- 
+
 </details>
+ 
+<br>
 
 <details>
 <summary>관리자 메뉴 - 회원 목록 및 회원 검색 GIF 보기</summary>
  
 ![12](https://user-images.githubusercontent.com/86394597/180460162-e0886e37-344e-4ce1-b39e-ef50dac9069c.gif)
- 
+- 관리자 메뉴
+- 키워드를 포함하는 아이디를 가진 회원 검색 기능
+- 전체 회원 수 표시
+- 회원 가입일 JpaAuditing 표시
 </details>
+ 
+<br>
 
 <details>
 <summary>마이페이지 입장 전 로그인 재검증 GIF 보기</summary>
- 
+
 ![13](https://user-images.githubusercontent.com/86394597/180460164-f7d5c5bb-4392-49f6-a83d-664ef14deeda.gif)
- 
+- 현재 로그인한 사용자의 비밀번호를 재검증
+- 현재 로그인한 사용자의 회원 정보
+- 해당 로그인한 사용자가 작성한 게시글 리스트
+- 비밀번호 변경기능
+- 회원 탈퇴 기능
 </details>
+ 
+<br>
 
 <details>
 <summary>마이페이지 - 내 작성글 GIF 보기</summary>
  
 ![14](https://user-images.githubusercontent.com/86394597/180460167-96207d0d-9680-4227-b297-a35c15bd625b.gif)
- 
+- 제목이나 내용을 포함하는 키워드로 게시물 검색 기능
+- 전체 게시물 수 표시
+- 게시글 조회수 기능
+- 게시판 리스트 작성시간 수정시간 기능 추가 JpaAuditing
+- DB에 등록된 게시글을 최근 작성시간/수정시간 기준 정렬
+- 아래 페이징처리된 버튼을 통해 분할처리된 페이지들에 등록된 게시글을 확인 가능, 현재 페이지는 회색 표기(게시글 리스트 페이징처리 기능)
+- 게시글 리스트 페이지 Paging 처리
+- Paging 블록 처리 5단위로 넘어가도록 처리
 </details>
+ 
+<br>
 
 <details>
 <summary>비밀번호 변경 @Valid 검증 GIF 보기</summary>
  
 ![15](https://user-images.githubusercontent.com/86394597/180460169-f9113220-eab0-46a9-bc81-9cd879a1af4c.gif)
- 
+- @Valid를 이용한 Form 검증
+- 입력 규칙이 틀리면, Error를 화면에 표시 
 </details>
+ 
+<br>
 
 <details>
 <summary>비밀번호 변경 - 현재 로그인 계정 비밀번호 불일치 에러 GIF 보기</summary>
- 
+- 현재 로그인한 사용자의 비밀번호가 불일치 시 에러 알림 
 ![16](https://user-images.githubusercontent.com/86394597/180460173-be8034ac-368e-4378-85ec-1cce9b1b6a31.gif)
  
 </details>
- 
+  
+<br>
+
 <details>
 <summary>비밀번호 변경 - 현재 비밀번호와 새 비밀번호 일치 에러 GIF 보기</summary>
  
 ![17](https://user-images.githubusercontent.com/86394597/180460174-087d7dc8-cafd-435c-b2ae-bf3912d64cba.gif)
- 
+- 현재 로그인한 사용자의 비밀번호와 새 비밀번호가 일치 시 에러 알림
 </details>
- 
+  
+<br>
+
 <details>
 <summary>비밀번호 변경 - 새 비밀번호 재확인 불일치 GIF 보기</summary>
- 
+- 새 비밀번호와 새 비밀번호 재확인이 불일치 시 에러 알림
 ![18](https://user-images.githubusercontent.com/86394597/180460176-57564c98-4a94-4013-ae2f-475af3e9b6ed.gif)
  
 </details>
- 
+  
+<br>
+
 <details>
 <summary>비밀번호 변경 완료 GIF 보기</summary>
  
 ![19](https://user-images.githubusercontent.com/86394597/180460178-512a5f06-e219-4755-b9be-98ed82f04957.gif)
- 
+- 로그아웃 후 변경된 비밀번호로 정상 로그인이 된다.
 </details>
+ 
+<br>
 
 <details>
 <summary>회원 탈퇴 및 자동 로그아웃 GIF 보기</summary>
- 
+
 ![20](https://user-images.githubusercontent.com/86394597/180460181-fc9c3f41-a846-4eb0-b6c9-691172d9b3f9.gif)
- 
+- 회원 탈퇴 시, 작성한 게시글 전체 삭제
+- 회원 탈퇴 시, 그 즉시 해당 아이디 자동 로그아웃
 </details>
-
-
-
-
-
-
-
-
  
-
-
-
-
-
-
 <br>
 
 ## ⅳ. 테스트 (테스트)
@@ -394,6 +479,7 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 ## ⅴ. 후기
 
 ### 1. 프로젝트 보완사항
+
 ### 2. 느낀 점 
 
 
