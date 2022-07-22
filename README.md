@@ -11,10 +11,63 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 <br>
 
 ### 2. 프로젝트 기능
+<details>
+<summary>프로젝트 기능 보기</summary>   
+ 
+[게시판]
+- CRUD 기능 (하단의 API 설계 참조)
+- 조회수
+- 페이징 및 검색 처리
+- 페이징 블록처리
+- JpaAduiding 작성/수정시간
+- FileUpload
+- 업로드 파일 다운로드
+- 댓글(개발중)
+- 작성자 본인, 관리자 권한이 아니라면 수정, 삭제 API 제한
 
+[관리자]
+- 회원 전체목록 조회
+- 회원 검색
+- ROLE_ADMIN, ROLE_USER 권한에 따른 수정, 삭제 API 제한 및 UI 차이
 
-### 3. 사용기술
+[회원]
+- Security 회원가입 및 로그인
+- 회원가입시 유효성 @Valid 검사 및 중복 검사
+- JavaMailSender 회원가입시 인증번호 메일 발송 및 검사
+- 마이페이지(나의회원정보)
+- 내 게시글
+- 회원정보수정(비밀번호변경)
+- 회원탈퇴
+- OAuth 2.0 구글, 네이버 로그인 (개발중)
 
+</details>
+
+<br>
+
+### 3. 개발 환경
+<details>
+<summary>개발환경 보기</summary>   
+ 
+[Backend]
+- IDE(통합개발환경) : IntelliJ Ultimate Edition
+- 개발 언어 : Java 11.0.9
+- 프레임워크 : Spring Boot 2.6.7
+- Build : Maven
+- Spring Security
+- OAuth 2.0
+ 
+[DataBase]
+- DB : MariaDB 10.6.7, MySQL Workbench 8.0 CE
+- DB-GUI-Tool : HeidiSQL 11.3.0
+- DB 접근 기술(ORM) : Spring Data JPA
+
+[Frontend]
+- Thymeleaf
+- Bootstrap
+- Html/Css
+- JavaScript
+</details>
+ 
 <br>
 
 ## 구조 및 설계
