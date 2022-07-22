@@ -233,6 +233,9 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 <summary>회원가입 + 메일 인증 GIF 보기</summary>
  
 ![2](https://user-images.githubusercontent.com/86394597/180460135-eeb480b2-3889-4545-953c-4aaadc3d3e2f.gif)
+ 
+![image](https://user-images.githubusercontent.com/86394597/180484697-1e6575c8-1a36-45fc-992b-312b0602251b.png)
+
 - @Valid를 이용한 Form 검증
 - 입력 규칙이 틀리면, Error를 화면에 표시 
 - JavaMailSender를 이용한 이메일 인증
