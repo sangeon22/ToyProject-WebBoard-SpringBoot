@@ -24,11 +24,12 @@ class AccountControllerTest {
 
     @Test
     @Transactional
-    @Rollback(false)
-    public void joinMember(){
+    @Rollback
+    public void 회원가입(){
         UserDto userDto = new UserDto();
-        userDto.setUsername("testuser22");
-        userDto.setPassword("xptmxm123!");
+        userDto.setUsername("testcode123");
+        userDto.setPassword("test12!");
+        userDto.setEmail("testcode1@naver.com");
         userDto.setBirth("19951218");
 
         User joinUser = userService.save(userDto);
