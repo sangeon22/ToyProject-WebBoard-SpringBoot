@@ -161,7 +161,7 @@ public class UserController {
         String NewPassword = passwordForm.getNewPassword();
         String RePassword = passwordForm.getRePassword();
 
-        String code = userService.passwordCheck(model, CurrentPassword, CurrentCheckPassword, NewPassword, RePassword);
+        String code = userService.passwordCheck(CurrentPassword, CurrentCheckPassword, NewPassword, RePassword);
 
         if (code.equals("ok")) {
             String encodedNewPassword = encoder.encode(NewPassword);

@@ -115,22 +115,19 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public String passwordCheck(Model model, String CurrentPassword, String CurrentCheckPassword, String NewPassword, String RePassword){
+    public String passwordCheck(String CurrentPassword, String CurrentCheckPassword, String NewPassword, String RePassword){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         if (!encoder.matches(CurrentCheckPassword, CurrentPassword)) {
-            model.addAttribute("error", "현재 패스워드 불일치");
             return "현재 패스워드 불일치";
         }
 
         if (NewPassword.equals(CurrentCheckPassword)) {
-            model.addAttribute("error", "동일한 패스워드");
             return "동일한 패스워드";
         }
 
 
         if (!NewPassword.equals(RePassword)) {
-            model.addAttribute("error", "새 패스워드 불일치");
             return "새 패스워드 불일치";
         }
 
