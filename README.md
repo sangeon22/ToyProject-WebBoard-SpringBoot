@@ -204,6 +204,11 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 
 ## ⅲ. 실행 화면 (구현)
 
+## 트러블슈팅 해결
+1. https://okky.kr/article/1252519
+2. https://okky.kr/article/1257276
+
+
 ### 메인화면
 
 ![1](https://user-images.githubusercontent.com/86394597/180411549-042e6585-917c-4919-aa68-f01b6a7a42cd.JPG)
