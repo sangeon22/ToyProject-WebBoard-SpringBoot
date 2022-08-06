@@ -376,7 +376,7 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 <summary>게시글 삭제 실패 (관리자 권한 OR 작성자 본인이 아니면 삭제 불가) GIF 보기</summary>
  
 ![11](https://user-images.githubusercontent.com/86394597/180460160-40d5e5dd-1181-42d9-8cf5-3b48a8c5d0eb.gif)
-- @PreAuthorize 및 Authentication을 통해 현재 사용자와 게시글 작성자를 비교하여 수정 권한 체크
+- @PreAuthorize 및 Authentication을 통해 현재 사용자와 게시글 작성자를 비교하여 삭제 권한 체크
 </details>
  
 <br>
