@@ -5,7 +5,7 @@ Springboot + security,JPA + HeidiSQL(MariaDB,MySQL) + BootStrap 웹게시판
 
 ## ⅰ. 프로젝트 소개 (요구사항)
 ### 1. 프로젝트 소개
-　CRUD API 설계는 기본적으로 웹 게시판이 가장 적절하다고 생각하여 웹 게시판 프로젝트를 만들게 되었습니다. 또한 spring을 활용하여 스프링에 대한 이해를 높이고자 시작하게 되었습니다.
+　CRUD API 설계는 기본적으로 웹 게시판이 가장 적절하다고 생각하여 독학으로 웹 게시판 프로젝트를 만들게 되었습니다. 또한 spring을 활용하여 스프링에 대한 이해를 높이고자 시작하게 되었습니다.
 Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, Thymeleaf 및 Script, html, css 등은 필요한 부분을 공부하며 추가하였고, Backend의 기능들을 추가하다 보니 더욱 흥미를 느껴 관련 문서, 구글링을 통해 원하는 기능을 구현해나갔습니다. OAuth2를 활용한 SNS 로그인과 댓글 기능은 아직 진행 중에 있습니다.
 
 <br>
@@ -204,6 +204,11 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 
 ## ⅲ. 실행 화면 (구현)
 
+## 트러블슈팅 해결
+1. https://okky.kr/article/1252519
+2. https://okky.kr/article/1257276
+
+
 ### 메인화면
 
 ![1](https://user-images.githubusercontent.com/86394597/180411549-042e6585-917c-4919-aa68-f01b6a7a42cd.JPG)
@@ -353,7 +358,7 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 <summary>게시글 수정 실패 (관리자 권한 OR 작성자 본인이 아니면 수정 불가) GIF 보기</summary>
  
 ![9](https://user-images.githubusercontent.com/86394597/180460156-e881948a-482f-462d-b0fb-610efc091462.gif)
- 
+- @PreAuthorize 및 Authentication을 통해 현재 사용자와 게시글 작성자를 비교하여 수정 권한 체크
 </details>
  
 <br>
@@ -371,7 +376,7 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 <summary>게시글 삭제 실패 (관리자 권한 OR 작성자 본인이 아니면 삭제 불가) GIF 보기</summary>
  
 ![11](https://user-images.githubusercontent.com/86394597/180460160-40d5e5dd-1181-42d9-8cf5-3b48a8c5d0eb.gif)
-
+- @PreAuthorize 및 Authentication을 통해 현재 사용자와 게시글 작성자를 비교하여 삭제 권한 체크
 </details>
  
 <br>
