@@ -50,8 +50,17 @@
 
     <br>
 
-    <img src="/img/kakao_login_medium_wide.png" alt="kakaoLogin" >
+    <h1>Kakao Login Test</h1>
 
+    <span th:if="${userId==null}">
+      <a href="https://kauth.kakao.com/oauth/authorize?client_id=4f4c8f81b799f2fbec85b68510dd443d&redirect_uri=http://localhost:5000/account/kakao&response_type=code">
+        <img src="/img/kakao_login_medium_wide.png">
+      </a>
+    </span>
+
+    <span th:if="${userId!=null}">
+			<a type="button" th:href="@{/account/logout}"value="로그아웃">
+	</span>
 
     <p class="mt-5 mb-3 text-muted">아직 회원이 아니신가요?</p>
     <a type="button" class="btn btn-outline-primary btn-block" th:href="@{/account/register}">회원가입</a>

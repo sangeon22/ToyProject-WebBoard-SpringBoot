@@ -28,8 +28,8 @@ public class UserService {
     @Autowired
     private BoardRepository boardRepository;
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+//    @Autowired
+//    private JavaMailSender javaMailSender;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -95,19 +95,19 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    @Transactional
-    public void processNewUser(UserDto userDto) {
-        User user = save(userDto);
-        sendSignUpConfirmEmail(user);
-    }
-
-    private void sendSignUpConfirmEmail(User user) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo(user.getEmail());
-        simpleMailMessage.setSubject("어니언 웹사이트 회원가입 메일 인증");
-        simpleMailMessage.setText("/check-email-token?token=" + user.getEmailCheckToken() + "&email=" + user.getEmail());
-        javaMailSender.send(simpleMailMessage);
-    }
+//    @Transactional
+//    public void processNewUser(UserDto userDto) {
+//        User user = save(userDto);
+//        sendSignUpConfirmEmail(user);
+//    }
+//
+//    private void sendSignUpConfirmEmail(User user) {
+//        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+//        simpleMailMessage.setTo(user.getEmail());
+//        simpleMailMessage.setSubject("어니언 웹사이트 회원가입 메일 인증");
+//        simpleMailMessage.setText("/check-email-token?token=" + user.getEmailCheckToken() + "&email=" + user.getEmail());
+//        javaMailSender.send(simpleMailMessage);
+//    }
 
     public void updatePassword(String username, String encodedNewPassword) {
         User user = userRepository.findByUsername(username);
@@ -133,6 +133,7 @@ public class UserService {
 
         return "ok";
     }
+
 
 //    @Transactional
 //    public Long updateInfo(String username, String newName, String birth){
