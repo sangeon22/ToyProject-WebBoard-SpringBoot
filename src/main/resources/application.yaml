@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: myadmin
+    url: jdbc:mariadb://localhost:3306/webboard
+    password: dlsrks12
+  thymeleaf:
+    cache: 'false'
+  freemarker:
+    cache: 'false'
+  devtools:
+    livereload:
+      enabled: 'true'
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'true'
+server:
+  port: '5000'
+logging:
+  level:
+    com:
+      springboard: DEBUG
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
