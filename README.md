@@ -204,7 +204,7 @@ Frontend는 BootStrap을 사용한 유튜브를 참고하였고, 이에 따라, 
 
 ## ⅲ. 실행 화면 (구현)
 
-## 트러블슈팅 해결
+### 트러블슈팅
 1. https://okky.kr/article/1252519
 2. https://okky.kr/article/1257276
 
