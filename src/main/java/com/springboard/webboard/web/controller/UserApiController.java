@@ -4,6 +4,7 @@ import com.springboard.webboard.domain.board.Board;
 import com.springboard.webboard.domain.user.User;
 import com.springboard.webboard.domain.user.UserRepository;
 import com.springboard.webboard.service.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,17 +12,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api")
 @Slf4j
 class UserApiController {
-    @Autowired
-    private UserRepository repository;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+    private final UserRepository repository;
+    private final UserService userService;
+    private final JdbcTemplate jdbcTemplate;
 
 //    @GetMapping("/users")
 //    public String all(Model model) {

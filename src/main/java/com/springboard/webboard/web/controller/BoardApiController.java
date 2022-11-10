@@ -6,6 +6,7 @@ import com.springboard.webboard.web.dto.BoardDto;
 import com.springboard.webboard.domain.board.Board;
 import com.springboard.webboard.domain.board.BoardRepository;
 import com.springboard.webboard.service.BoardService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,15 +20,13 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
 class BoardApiController {
 
-    @Autowired
-    private BoardRepository repository;
-
-    @Autowired
-    private BoardService boardService;
+    private final BoardRepository repository;
+    private final BoardService boardService;
 
     @Autowired
     private BoardRepository boardRepository;

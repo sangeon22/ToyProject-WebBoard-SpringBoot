@@ -6,6 +6,7 @@ import com.springboard.webboard.domain.Role;
 import com.springboard.webboard.domain.user.User;
 import com.springboard.webboard.domain.board.BoardRepository;
 import com.springboard.webboard.domain.user.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,13 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
-
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private BoardRepository boardRepository;
 
 //    @Autowired

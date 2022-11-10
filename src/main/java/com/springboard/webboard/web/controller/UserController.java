@@ -6,6 +6,7 @@ import com.springboard.webboard.web.dto.UserDto;
 import com.springboard.webboard.domain.user.UserRepository;
 import com.springboard.webboard.service.BoardService;
 import com.springboard.webboard.service.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,20 +29,14 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private BoardService boardService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UserService userService;
+    private final UserRepository userRepository;
+    private final BoardService boardService;
+    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
     @GetMapping("/userlist")
     public String list(Model model,

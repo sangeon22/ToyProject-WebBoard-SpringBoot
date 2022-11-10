@@ -4,6 +4,7 @@ import com.springboard.webboard.web.dto.BoardDto;
 import com.springboard.webboard.domain.board.BoardRepository;
 import com.springboard.webboard.service.BoardService;
 import com.springboard.webboard.config.validator.BoardValidator;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,18 +24,14 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 
-    @Autowired
-    private BoardRepository boardRepository;
-
-    @Autowired
-    private BoardService boardService;
-
-    @Autowired
-    private BoardValidator boardValidator;
+    private final BoardRepository boardRepository;
+    private final BoardService boardService;
+    private final BoardValidator boardValidator;
 
 
     @GetMapping("/list")

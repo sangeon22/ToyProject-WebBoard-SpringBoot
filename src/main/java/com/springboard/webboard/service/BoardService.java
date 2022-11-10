@@ -5,6 +5,7 @@ import com.springboard.webboard.domain.board.Board;
 import com.springboard.webboard.domain.user.User;
 import com.springboard.webboard.domain.board.BoardRepository;
 import com.springboard.webboard.domain.user.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +19,12 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @Service
 public class BoardService {
 
-    @Autowired
-    private BoardRepository boardRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+    private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
 
 
     @Transactional

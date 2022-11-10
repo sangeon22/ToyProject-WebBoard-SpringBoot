@@ -5,6 +5,7 @@ import com.springboard.webboard.web.dto.UserDto;
 import com.springboard.webboard.domain.user.User;
 import com.springboard.webboard.domain.user.UserRepository;
 import com.springboard.webboard.service.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,23 +29,18 @@ import java.util.Map;
 import java.util.Properties;
 
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/account")
 public class AccountController {
-
-    KakaoAPI kakaoApi = new KakaoAPI();
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private HttpSession httpSession;
+    private final UserService userService;
+    private final UserRepository userRepository;
+    private final HttpSession httpSession;
 
     private String AuthNum ="00000";
     private String mailcheck = "fff";
+
+    KakaoAPI kakaoApi = new KakaoAPI();
 
     @GetMapping("/login")
     public String login(Model model) {
