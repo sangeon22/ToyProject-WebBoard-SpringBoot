@@ -1,6 +1,6 @@
-package com.springboard.webboard.repository;
+package com.springboard.webboard.domain.user;
 
-import com.springboard.webboard.entity.User;
+import com.springboard.webboard.domain.user.User;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.springboard.webboard.controller;
+package com.springboard.webboard.web.controller;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

@@ -1,11 +1,9 @@
-package com.springboard.webboard.controller;
+package com.springboard.webboard.web.controller;
 
-import com.springboard.webboard.dto.BoardDto;
-import com.springboard.webboard.dto.BoardViewDto;
-import com.springboard.webboard.entity.Board;
-import com.springboard.webboard.repository.BoardRepository;
+import com.springboard.webboard.web.dto.BoardDto;
+import com.springboard.webboard.domain.board.BoardRepository;
 import com.springboard.webboard.service.BoardService;
-import com.springboard.webboard.validator.BoardValidator;
+import com.springboard.webboard.config.validator.BoardValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Controller

@@ -1,13 +1,12 @@
 package com.springboard.webboard.service;
 
-import com.springboard.webboard.dto.BoardDto;
-import com.springboard.webboard.entity.Board;
-import com.springboard.webboard.entity.User;
-import com.springboard.webboard.repository.BoardRepository;
-import com.springboard.webboard.repository.UserRepository;
+import com.springboard.webboard.web.dto.BoardDto;
+import com.springboard.webboard.domain.board.Board;
+import com.springboard.webboard.domain.user.User;
+import com.springboard.webboard.domain.board.BoardRepository;
+import com.springboard.webboard.domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -16,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

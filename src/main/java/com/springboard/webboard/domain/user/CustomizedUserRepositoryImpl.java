@@ -1,13 +1,10 @@
-package com.springboard.webboard.repository;
+package com.springboard.webboard.domain.user;
 
-import com.springboard.webboard.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 public class CustomizedUserRepositoryImpl {
 

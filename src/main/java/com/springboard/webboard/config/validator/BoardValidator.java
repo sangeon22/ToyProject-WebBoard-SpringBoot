@@ -1,7 +1,6 @@
-package com.springboard.webboard.validator;
+package com.springboard.webboard.config.validator;
 
-import com.springboard.webboard.dto.BoardDto;
-import com.springboard.webboard.entity.Board;
+import com.springboard.webboard.web.dto.BoardDto;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

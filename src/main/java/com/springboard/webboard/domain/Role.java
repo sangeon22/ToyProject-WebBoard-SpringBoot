@@ -1,6 +1,7 @@
-package com.springboard.webboard.entity;
+package com.springboard.webboard.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springboard.webboard.domain.user.User;
 import lombok.Data;
 
 import javax.persistence.*;

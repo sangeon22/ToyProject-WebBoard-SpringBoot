@@ -1,9 +1,8 @@
 package com.springboard.webboard.service;
 
-import com.springboard.webboard.controller.UserController;
-import com.springboard.webboard.dto.UserDto;
-import com.springboard.webboard.entity.User;
-import com.springboard.webboard.repository.UserRepository;
+import com.springboard.webboard.web.dto.UserDto;
+import com.springboard.webboard.domain.user.User;
+import com.springboard.webboard.domain.user.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.ui.Model;
 
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @Transactional

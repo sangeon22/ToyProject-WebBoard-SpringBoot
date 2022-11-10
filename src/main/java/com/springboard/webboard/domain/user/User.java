@@ -1,16 +1,14 @@
-package com.springboard.webboard.entity;
+package com.springboard.webboard.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springboard.webboard.domain.board.Board;
+import com.springboard.webboard.domain.Role;
+import com.springboard.webboard.domain.TimeEntity;
 import lombok.*;
-import sun.util.calendar.BaseCalendar;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 

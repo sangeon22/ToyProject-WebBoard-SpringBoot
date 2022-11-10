@@ -1,14 +1,8 @@
-package com.springboard.webboard.dto;
+package com.springboard.webboard.web.dto;
 
 
-import com.springboard.webboard.entity.User;
 import lombok.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 

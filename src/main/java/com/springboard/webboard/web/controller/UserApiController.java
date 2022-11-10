@@ -1,17 +1,14 @@
-package com.springboard.webboard.controller;
+package com.springboard.webboard.web.controller;
 
-import com.springboard.webboard.entity.Board;
-import com.springboard.webboard.entity.User;
-import com.springboard.webboard.repository.UserRepository;
+import com.springboard.webboard.domain.board.Board;
+import com.springboard.webboard.domain.user.User;
+import com.springboard.webboard.domain.user.UserRepository;
 import com.springboard.webboard.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")

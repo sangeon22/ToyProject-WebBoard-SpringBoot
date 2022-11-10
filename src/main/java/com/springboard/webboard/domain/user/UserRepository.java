@@ -1,6 +1,6 @@
-package com.springboard.webboard.repository;
+package com.springboard.webboard.domain.user;
 
-import com.springboard.webboard.entity.User;
+import com.springboard.webboard.domain.user.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

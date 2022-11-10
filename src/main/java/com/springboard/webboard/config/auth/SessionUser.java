@@ -1,6 +1,6 @@
-package com.springboard.webboard.config;
+package com.springboard.webboard.config.auth;
 
-import com.springboard.webboard.entity.User;
+import com.springboard.webboard.domain.user.User;
 import lombok.Getter;
 
 import java.io.Serializable;

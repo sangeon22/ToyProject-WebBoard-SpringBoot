@@ -1,7 +1,7 @@
-package com.springboard.webboard.dto;
+package com.springboard.webboard.web.dto;
 
-import com.springboard.webboard.entity.Board;
-import com.springboard.webboard.entity.TimeEntity;
+import com.springboard.webboard.domain.board.Board;
+import com.springboard.webboard.domain.TimeEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;

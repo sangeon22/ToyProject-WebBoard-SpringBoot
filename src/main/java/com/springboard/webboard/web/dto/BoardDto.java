@@ -1,18 +1,11 @@
-package com.springboard.webboard.dto;
+package com.springboard.webboard.web.dto;
 
-import com.springboard.webboard.entity.Board;
-import com.springboard.webboard.entity.TimeEntity;
-import com.springboard.webboard.entity.User;
+import com.springboard.webboard.domain.board.Board;
+import com.springboard.webboard.domain.user.User;
 import lombok.*;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Page;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter

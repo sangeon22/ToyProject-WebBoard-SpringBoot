@@ -1,4 +1,4 @@
-package com.springboard.webboard.entity;
+package com.springboard.webboard.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

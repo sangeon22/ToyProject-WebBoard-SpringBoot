@@ -1,8 +1,8 @@
 package com.springboard.webboard.controller;
 
-import com.springboard.webboard.dto.UserDto;
-import com.springboard.webboard.entity.User;
-import com.springboard.webboard.repository.UserRepository;
+import com.springboard.webboard.web.dto.UserDto;
+import com.springboard.webboard.domain.user.User;
+import com.springboard.webboard.domain.user.UserRepository;
 import com.springboard.webboard.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.test.annotation.Rollback;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class AccountControllerTest {

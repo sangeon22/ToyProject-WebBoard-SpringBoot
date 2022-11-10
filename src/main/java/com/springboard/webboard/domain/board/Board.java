@@ -1,17 +1,13 @@
-package com.springboard.webboard.entity;
+package com.springboard.webboard.domain.board;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springboard.webboard.domain.TimeEntity;
+import com.springboard.webboard.domain.user.User;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.Authentication;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.util.List;
 
 
 @Entity

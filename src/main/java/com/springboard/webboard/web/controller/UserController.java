@@ -1,10 +1,9 @@
-package com.springboard.webboard.controller;
+package com.springboard.webboard.web.controller;
 
-import com.springboard.webboard.dto.BoardDto;
-import com.springboard.webboard.dto.PasswordForm;
-import com.springboard.webboard.dto.UserDto;
-import com.springboard.webboard.entity.User;
-import com.springboard.webboard.repository.UserRepository;
+import com.springboard.webboard.web.dto.BoardDto;
+import com.springboard.webboard.web.dto.PasswordForm;
+import com.springboard.webboard.web.dto.UserDto;
+import com.springboard.webboard.domain.user.UserRepository;
 import com.springboard.webboard.service.BoardService;
 import com.springboard.webboard.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

@@ -1,23 +1,18 @@
 package com.springboard.webboard.service;
 
-import com.springboard.webboard.dto.UserDto;
-import com.springboard.webboard.entity.Board;
-import com.springboard.webboard.entity.Role;
-import com.springboard.webboard.entity.User;
-import com.springboard.webboard.repository.BoardRepository;
-import com.springboard.webboard.repository.UserRepository;
+import com.springboard.webboard.web.dto.UserDto;
+import com.springboard.webboard.domain.board.Board;
+import com.springboard.webboard.domain.Role;
+import com.springboard.webboard.domain.user.User;
+import com.springboard.webboard.domain.board.BoardRepository;
+import com.springboard.webboard.domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {

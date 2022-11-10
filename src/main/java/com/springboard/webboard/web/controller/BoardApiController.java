@@ -1,10 +1,10 @@
-package com.springboard.webboard.controller;
+package com.springboard.webboard.web.controller;
 
 import java.util.List;
 
-import com.springboard.webboard.dto.BoardDto;
-import com.springboard.webboard.entity.Board;
-import com.springboard.webboard.repository.BoardRepository;
+import com.springboard.webboard.web.dto.BoardDto;
+import com.springboard.webboard.domain.board.Board;
+import com.springboard.webboard.domain.board.BoardRepository;
 import com.springboard.webboard.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
