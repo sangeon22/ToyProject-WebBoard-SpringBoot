@@ -70,7 +70,7 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Integer boardView(Long id) {
         return boardRepository.findById(id).get().getView();
     }
@@ -85,7 +85,7 @@ public class BoardService {
         boardRepository.deleteById(id);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public int updateView(Long id) {
         return boardRepository.updateView(id);
     }

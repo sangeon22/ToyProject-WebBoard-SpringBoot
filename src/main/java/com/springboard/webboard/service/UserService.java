@@ -18,8 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class UserService {
-    private UserRepository userRepository;
-    private BoardRepository boardRepository;
+    private final UserRepository userRepository;
+    private final BoardRepository boardRepository;
 
 //    @Autowired
 //    private JavaMailSender javaMailSender;
@@ -32,6 +32,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Transactional(readOnly = true)
     public UserDto findUser(String username) {
         User userWrapper = userRepository.findByUsername(username);
         if (userWrapper != null) {
