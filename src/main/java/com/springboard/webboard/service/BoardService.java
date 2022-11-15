@@ -27,7 +27,7 @@ public class BoardService {
     private final UserRepository userRepository;
 
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<BoardDto> getList(Pageable pageable, String searchKeyword){
         Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchKeyword, searchKeyword, pageable);
         Page<BoardDto> boardDtoList = new BoardDto().toDtoList(boards); // Page<Entity> -> Page<Dto> 변환.
@@ -35,7 +35,7 @@ public class BoardService {
         return boardDtoList;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<BoardDto> getMyBoardList(Pageable pageable, Authentication authentication){
         Page<Board> boards = boardRepository.userBoardList(authentication.getName(), pageable);
         Page<BoardDto> boardDtoList = new BoardDto().toDtoList(boards);
@@ -90,7 +90,7 @@ public class BoardService {
         return boardRepository.updateView(id);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public BoardDto getPost(Long id) {
         Optional<Board> boardWrapper = boardRepository.findById(id);
         if(boardWrapper.isPresent())

@@ -24,6 +24,7 @@ public class UserService {
 //    @Autowired
 //    private JavaMailSender javaMailSender;
 
+    @Transactional(readOnly = true)
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -71,7 +72,7 @@ public class UserService {
 
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List getlist(String searchKeyword) {
         return userRepository.findByUsernameJPQLQuery(searchKeyword);
     }
