@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 application-mail.properties
 application-db.properties
+application-oauth.properties
 
 ### STS ###
 .apt_generated
