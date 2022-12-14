@@ -62,15 +62,17 @@ public class User extends TimeEntity {
         this.enabled = enabled;
     }
 
-    public User update(String name) {
-        this.username = username;
-        return this;
-    }
-
     public void generateEmailCheckToken() {
         this.emailCheckToken = UUID.randomUUID().toString();
         this.emailCheckTokenGeneratedAt = LocalDateTime.now();
     }
+
+    public User update(String name){
+        this.username = name;
+        return this;
+    }
+
+
 
 //    @OneToMany(mappedBy = "user")
 //    private List<Reply> replyList;

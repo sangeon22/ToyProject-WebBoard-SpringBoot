@@ -20,6 +20,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private CustomOAuth2UserService customOAuth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -34,7 +36,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .and()
                 .logout()
-                    .permitAll();
+                    .permitAll()
+                    .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService);
     }
 
     @Autowired

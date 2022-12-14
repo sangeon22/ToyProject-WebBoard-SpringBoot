@@ -1,6 +1,5 @@
 package com.springboard.webboard.domain.user;
 
-import com.springboard.webboard.domain.user.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +21,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findById(Long id);
 
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 }

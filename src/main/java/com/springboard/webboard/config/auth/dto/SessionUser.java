@@ -1,4 +1,4 @@
-package com.springboard.webboard.config.auth;
+package com.springboard.webboard.config.auth.dto;
 
 import com.springboard.webboard.domain.user.User;
 import lombok.Getter;
