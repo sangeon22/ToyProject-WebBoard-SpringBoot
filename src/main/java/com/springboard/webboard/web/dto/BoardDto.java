@@ -46,7 +46,7 @@ public class BoardDto {
     }
 
     public Board toEntity() {
-        Board build = Board.builder()
+        return Board.builder()
                 .id(id)
                 .title(title)
                 .content(content)
@@ -54,7 +54,6 @@ public class BoardDto {
                 .filepath(filepath)
                 .view(view)
                 .build();
-        return build;
     }
 
     public Page<BoardDto> toDtoList(Page<Board> boards) {

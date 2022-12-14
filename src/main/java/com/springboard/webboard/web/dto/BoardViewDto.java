@@ -42,7 +42,7 @@ public class BoardViewDto extends TimeEntity {
     }
 
     public Board toEntity(){
-        Board build = Board.builder()
+        return Board.builder()
                 .id(id)
                 .title(title)
                 .content(content)
@@ -50,7 +50,6 @@ public class BoardViewDto extends TimeEntity {
                 .filepath(filepath)
                 .view(view)
                 .build();
-        return build;
     }
 
 }
