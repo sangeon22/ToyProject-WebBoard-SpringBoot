@@ -1,5 +1,6 @@
 package com.springboard.webboard.web.controller;
 
+import com.springboard.webboard.config.auth.dto.SessionUser;
 import com.springboard.webboard.web.dto.BoardDto;
 import com.springboard.webboard.domain.board.BoardRepository;
 import com.springboard.webboard.service.BoardService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 
@@ -32,6 +34,7 @@ public class BoardController {
     private final BoardRepository boardRepository;
     private final BoardService boardService;
     private final BoardValidator boardValidator;
+    private final HttpSession httpSession;
 
 
     @GetMapping("/list")
@@ -95,7 +98,14 @@ public class BoardController {
             return "board/form";
         } else {
             Integer view = 0;
-            String username = authentication.getName();
+            String username = null;
+            if (authentication.getName().matches("[+-]?\\d*(\\.\\d+)?")) {
+                SessionUser user = (SessionUser) httpSession.getAttribute("user");
+                username = user.getUsername();
+            } else {
+                username = authentication.getName();
+            }
+
             boardService.save(boardDto, username, file, view);
             model.addAttribute("message", "글 작성이 완료되었습니다.");
             model.addAttribute("searchUrl", "/board/list");
@@ -120,14 +130,14 @@ public class BoardController {
                          MultipartFile file,
                          HttpServletRequest request,
                          Model model) throws IOException {
-
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         boardValidator.validate(boardDto, bindingResult);
         if (bindingResult.hasErrors()) {
             return "board/modify";
         }
         String username = boardRepository.findById(boardDto.getId()).get().getUser().getUsername();
         Integer view = boardRepository.findById(boardDto.getId()).get().getView();
-        if (authentication.getName().equals(username) || request.isUserInRole("ROLE_ADMIN")) {
+        if (authentication.getName().equals(username) || request.isUserInRole("ROLE_ADMIN") || user.getUsername().equals(username)) {
             boardService.save(boardDto, username, file, view);
             model.addAttribute("message", "글 수정이 완료되었습니다.");
             model.addAttribute("searchUrl", "/board/list");

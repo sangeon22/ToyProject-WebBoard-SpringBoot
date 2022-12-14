@@ -2,6 +2,7 @@ package com.springboard.webboard.web.controller;
 
 import java.util.List;
 
+import com.springboard.webboard.config.auth.dto.SessionUser;
 import com.springboard.webboard.web.dto.BoardDto;
 import com.springboard.webboard.domain.board.Board;
 import com.springboard.webboard.domain.board.BoardRepository;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @Slf4j
@@ -27,6 +29,7 @@ class BoardApiController {
 
     private final BoardRepository repository;
     private final BoardService boardService;
+    private final HttpSession httpSession;
 
     @Autowired
     private BoardRepository boardRepository;
@@ -78,8 +81,9 @@ class BoardApiController {
                      Authentication authentication,
                      HttpServletRequest request,
                      Model model) {
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         String username = boardRepository.findById(boardDto.getId()).get().getUser().getUsername();
-        if (authentication.getName().equals(username) || request.isUserInRole("ROLE_ADMIN")) {
+        if (authentication.getName().equals(username) || request.isUserInRole("ROLE_ADMIN") || user.getUsername().equals(username)) {
             boardService.deleteById(id);
             return new ResponseEntity(HttpStatus.OK);
         } else {

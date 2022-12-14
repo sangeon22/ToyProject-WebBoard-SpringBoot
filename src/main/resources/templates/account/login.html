@@ -29,25 +29,18 @@
     <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-    <!-- <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div> -->
+
     <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
 
-<!--    <div>-->
-<!--      <a href="https://kauth.kakao.com/oauth/authorize?client_id=91e81f913533b4cab6ce6fd589cdbfd8&redirect_uri=http://localhost:8090/account/kakao/login&response_type=code" class="btn btn-lg btn-block">-->
-<!--        <img src="/img/kakao_login_medium_wide.png" alt="카카오 로그인" />-->
-<!--      </a>-->
-<!--    </div>-->
     <br>
       <!-- 스프링 시큐리티에서 기본 제공하는 URL - 별도 컨트롤러 작성 필요 없음 -->
     <div th:if="${#strings.isEmpty(username)}">
-      <a href="/oauth2/authorization/google" class="btn btn-lg btn-block btn-success active" role="button">구글 로그인</a>
-    </div>
+      <a href="/oauth2/authorization/google"><img src="/img/btn_google_signin_dark_focus_web@2x.png" style="width: 300px; height: 45px; margin-bottom: 10px"></a>
 
-    <br>
+      <br>
+
+      <a href="/oauth2/authorization/naver"><img src="/img/btnG_완성형.png" style="width: 300px; height: 45px; margin-bottom: 10px"></a>
+    </div>
 
     <span th:if="${userId==null}">
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=4f4c8f81b799f2fbec85b68510dd443d&redirect_uri=http://localhost:5000/account/kakao&response_type=code">

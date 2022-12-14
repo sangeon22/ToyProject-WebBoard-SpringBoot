@@ -1,6 +1,6 @@
 package com.springboard.webboard.web.controller;
 
-import com.springboard.webboard.config.auth.SessionUser;
+import com.springboard.webboard.config.auth.dto.SessionUser;
 import com.springboard.webboard.service.MailService;
 import com.springboard.webboard.web.dto.UserDto;
 import com.springboard.webboard.domain.user.User;
@@ -36,10 +36,6 @@ public class AccountController {
     @GetMapping("/login")
     public String login(Model model) {
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
-
-        if (user != null) {
-            model.addAttribute("username", user.getUsername());
-        }
         return "account/login";
     }
 
@@ -110,32 +106,34 @@ public class AccountController {
         }
     }
 
-    @GetMapping("/check-email-token")
-    public String checkEmailToken(String token, String email, Model model) {
-        User user = userRepository.findByEmail(email);
-
-        if (user == null) {
-            model.addAttribute("error", "wrong.email");
-            return "account/checked-email";
-        }
-
-        if (!user.getEmailCheckToken().equals(token)) {
-            model.addAttribute("error", "wrong.token");
-            return "account/checked-email";
-        }
-
-        user.setEmailVerified(true);
-        model.addAttribute("username", user.getUsername());
-
-        return "account/checked-email";
-    }
-
-
     @PostMapping("/sendEmail")
     @ResponseBody
     public String sendEmail(@RequestParam String email) throws Exception {
         return mailService.sendSimpleMessage(email);
     }
+
+//    @GetMapping("/check-email-token")
+//    public String checkEmailToken(String token, String email, Model model) {
+//        User user = userRepository.findByEmail(email);
+//
+//        if (user == null) {
+//            model.addAttribute("error", "wrong.email");
+//            return "account/checked-email";
+//        }
+//
+//        if (!user.getEmailCheckToken().equals(token)) {
+//            model.addAttribute("error", "wrong.token");
+//            return "account/checked-email";
+//        }
+//
+//        user.setEmailVerified(true);
+//        model.addAttribute("username", user.getUsername());
+//
+//        return "account/checked-email";
+//    }
+
+
+
 
 //    @ResponseBody
 //    public String sendEmail(@RequestParam String email,
