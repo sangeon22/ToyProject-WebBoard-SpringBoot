@@ -1,5 +1,6 @@
 package com.springboard.webboard.web.controller;
 
+import com.springboard.webboard.config.auth.LoginUser;
 import com.springboard.webboard.config.auth.dto.SessionUser;
 import com.springboard.webboard.web.dto.BoardDto;
 import com.springboard.webboard.domain.board.BoardRepository;
@@ -89,6 +90,7 @@ public class BoardController {
 
     @PostMapping("/form")
     public String postForm(@Valid BoardDto boardDto,
+                           @LoginUser SessionUser user,
                            BindingResult bindingResult,
                            Authentication authentication,
                            MultipartFile file,
@@ -100,7 +102,6 @@ public class BoardController {
             Integer view = 0;
             String username = null;
             if (authentication.getName().matches("[+-]?\\d*(\\.\\d+)?")) {
-                SessionUser user = (SessionUser) httpSession.getAttribute("user");
                 username = user.getUsername();
             } else {
                 username = authentication.getName();
@@ -125,12 +126,12 @@ public class BoardController {
     //    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modify/{id}")
     public String modify(@Valid BoardDto boardDto,
+                         @LoginUser SessionUser user,
                          BindingResult bindingResult,
                          Authentication authentication,
                          MultipartFile file,
                          HttpServletRequest request,
                          Model model) throws IOException {
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         boardValidator.validate(boardDto, bindingResult);
         if (bindingResult.hasErrors()) {
             return "board/modify";

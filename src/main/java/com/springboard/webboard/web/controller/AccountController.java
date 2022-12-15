@@ -1,5 +1,6 @@
 package com.springboard.webboard.web.controller;
 
+import com.springboard.webboard.config.auth.LoginUser;
 import com.springboard.webboard.config.auth.dto.SessionUser;
 import com.springboard.webboard.service.MailService;
 import com.springboard.webboard.web.dto.UserDto;
@@ -34,8 +35,7 @@ public class AccountController {
     KakaoAPI kakaoApi = new KakaoAPI();
 
     @GetMapping("/login")
-    public String login(Model model) {
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+    public String login() {
         return "account/login";
     }
 

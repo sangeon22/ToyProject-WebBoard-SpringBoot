@@ -9,11 +9,9 @@ import java.io.Serializable;
 public class SessionUser implements Serializable {
     private String username;
     private String email;
-    private String birth;
 
     public SessionUser(User user) {
         this.username = user.getUsername();
         this.email = user.getEmail();
-        this.birth = user.getBirth();
     }
 }

@@ -2,6 +2,7 @@ package com.springboard.webboard.web.controller;
 
 import java.util.List;
 
+import com.springboard.webboard.config.auth.LoginUser;
 import com.springboard.webboard.config.auth.dto.SessionUser;
 import com.springboard.webboard.web.dto.BoardDto;
 import com.springboard.webboard.domain.board.Board;
@@ -77,11 +78,10 @@ class BoardApiController {
 //    @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/boards/{id}")
     ResponseEntity deleteBoard(@PathVariable Long id,
+                     @LoginUser SessionUser user,
                      BoardDto boardDto,
                      Authentication authentication,
-                     HttpServletRequest request,
-                     Model model) {
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+                     HttpServletRequest request) {
         String username = boardRepository.findById(boardDto.getId()).get().getUser().getUsername();
         if (authentication.getName().equals(username) || request.isUserInRole("ROLE_ADMIN") || user.getUsername().equals(username)) {
             boardService.deleteById(id);
