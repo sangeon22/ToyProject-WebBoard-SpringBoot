@@ -192,7 +192,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>WebboardApplication</mainClass>
+                            <mainClass>WebboardApplication.java</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
