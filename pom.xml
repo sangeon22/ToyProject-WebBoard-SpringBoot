@@ -136,9 +136,50 @@
 <!--        </dependency>-->
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>db</id>
+            <properties>
+                <environment>db</environment>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+        </profile>
+        <profile>
+            <id>mail</id>
+            <properties>
+                <environment>mail</environment>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources-${environment}</directory>
+            </resource>
+        </resources>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -156,6 +197,8 @@
                     </archive>
                 </configuration>
             </plugin>
+        </plugins>
+
 <!--            <plugin>-->
 <!--                <groupId>com.mysema.maven</groupId>-->
 <!--                <artifactId>apt-maven-plugin</artifactId>-->
@@ -179,7 +222,6 @@
 <!--&lt;!&ndash;                    </dependency>&ndash;&gt;-->
 <!--&lt;!&ndash;                </dependencies>&ndash;&gt;-->
 <!--            </plugin>-->
-        </plugins>
     </build>
 
 </project>
