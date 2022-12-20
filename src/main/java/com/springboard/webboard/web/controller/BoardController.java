@@ -101,10 +101,10 @@ public class BoardController {
         } else {
             Integer view = 0;
             String username = null;
-            if (authentication.getName().matches("[+-]?\\d*(\\.\\d+)?")) {
-                username = user.getUsername();
-            } else {
+            if (user == null) {
                 username = authentication.getName();
+            } else {
+                username = user.getUsername();
             }
 
             boardService.save(boardDto, username, file, view);

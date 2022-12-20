@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.springboard</groupId>
-    <artifactId>webboard</artifactId>
+    <artifactId>ToyProject-WebBoard-SpringBoot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>webboard</name>
-    <description>webboard</description>
+    <name>ToyProject-WebBoard-SpringBoot</name>
+    <description>ToyProject-WebBoard-SpringBoot</description>
 
     <properties>
         <java.version>1.8</java.version>
